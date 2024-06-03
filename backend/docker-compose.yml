@@ -1,11 +1,12 @@
-version: '3.5' 
 services: 
   db: 
     image: postgres 
     restart: always
     environment:
-      - POSTGRES_PASSWORD=postgresql
-    container_name: postgres-number-8
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    container_name: postgres-number8
     volumes:
       - ./pgdata:/var/lib/postgresql/data 
     ports:
@@ -14,9 +15,9 @@ services:
     build: 
       context: . 
       dockerfile: Dockerfile 
-    container_name: nest-number-8
-    environment: 
-      - PORT=${PORT} 
+    container_name: nest-number8
+    env_file:
+      - .env
     ports: 
       - '3001:3001' 
     depends_on: 
@@ -26,7 +27,7 @@ services:
   pgadmin:
     image: dpage/pgadmin4 
     restart: always 
-    container_name: pgadmin-number-8 
+    container_name: pgadmin-number8 
     environment:
       - PGADMIN_DEFAULT_EMAIL=admin@admin.com 
       - PGADMIN_DEFAULT_PASSWORD=pgadmin4 
