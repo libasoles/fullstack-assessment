@@ -5,7 +5,7 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Department } from './Department.entity';
+import { Department } from '../departments/Department.entity';
 
 type ConstructorParams = {
   id?: number;
@@ -42,8 +42,6 @@ export class Employee {
   address: string; // TODO: grab address from Address entity
 
   constructor(params?: ConstructorParams) {
-    if (params) {
-      Object.assign(this, params);
-    }
+    if (params) Object.assign(this, params);
   }
 }

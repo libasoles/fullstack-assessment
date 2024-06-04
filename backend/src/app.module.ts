@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import typeorm from './config/typeorm';
 import { EmployeesModule } from './employees/employees.module';
+import { DepartmentsModule } from './departments/departments.module';
 
 const configModule = ConfigModule.forRoot({
   isGlobal: true,
@@ -19,7 +20,7 @@ const typeOrmModule = TypeOrmModule.forRootAsync({
 });
 
 @Module({
-  imports: [configModule, typeOrmModule, EmployeesModule],
+  imports: [configModule, typeOrmModule, EmployeesModule, DepartmentsModule],
   controllers: [AppController],
   providers: [AppService],
 })

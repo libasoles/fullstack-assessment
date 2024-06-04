@@ -1,5 +1,10 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
+type ConstructorParams = {
+  id?: number;
+  name: string;
+};
+
 @Entity()
 export class Department {
   @PrimaryGeneratedColumn()
@@ -8,7 +13,7 @@ export class Department {
   @Column()
   name: string;
 
-  constructor(name?: string) {
-    this.name = name;
+  constructor(params?: ConstructorParams) {
+    if (params) Object.assign(this, params);
   }
 }
