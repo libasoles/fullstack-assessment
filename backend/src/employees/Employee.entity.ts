@@ -29,7 +29,7 @@ export class Employee {
   lastName: string;
 
   @Column({ name: 'hire_date' })
-  hireDate: Date; // TODO: choose correct type based on selected Dates library?
+  hireDate: Date;
 
   @OneToOne(() => Department)
   @JoinColumn({ name: 'department_id' })
