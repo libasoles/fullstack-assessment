@@ -17,4 +17,14 @@ export class EmployeesService {
   async getAll(): Promise<Employee[]> {
     return this.employeeRepository.find();
   }
+
+  async getOne(id: number): Promise<Employee> {
+    return this.employeeRepository.findOne({ where: { id } });
+  }
+
+  async delete(id: number) {
+    const result = await this.employeeRepository.delete(id);
+
+    return { affected: result.affected };
+  }
 }

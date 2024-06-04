@@ -39,7 +39,7 @@ export class Employee {
   phone: string;
 
   @Column()
-  address: string;
+  address: string; // TODO: grab address from Address entity
 
   constructor(params?: ConstructorParams) {
     if (params) {
