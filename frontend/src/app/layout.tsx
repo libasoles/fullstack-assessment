@@ -1,31 +1,27 @@
-import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
-import { ThemeProvider } from "@mui/material/styles";
+import { QueryClient } from "@tanstack/react-query";
 import type { Metadata } from "next";
-import theme from "../theme";
+import { PropsWithChildren } from "react";
+import Providers from "../providers/providers";
 
 export const metadata: Metadata = {
   title: "Number8 assessment",
   description: "Fullstack assessment for Number8",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+const queryClient = new QueryClient();
+
+export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
       <body>
-        <AppRouterCacheProvider>
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <Container>
-              <main>{children}</main>
-            </Container>
-          </ThemeProvider>
-        </AppRouterCacheProvider>
+        <Providers>
+          <CssBaseline />
+          <Container>
+            <main>{children}</main>
+          </Container>
+        </Providers>
       </body>
     </html>
   );
