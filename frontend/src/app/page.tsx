@@ -1,7 +1,6 @@
 import EmployeeCard from "@/components/EmployeeCard";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import { Employee } from "./types/Employee";
 
@@ -32,24 +31,22 @@ const response: Employee[] = [
   },
 ];
 
-export default function Home() {
+export default function Employees() {
   return (
-    <main>
-      <Container>
-        <Stack direction="column" spacing={2}>
-          <Box sx={{ alignSelf: "flex-end" }}>
-            <Button variant="outlined" size="small">
-              Add Employee
-            </Button>
-          </Box>
+    <Box>
+      <Stack direction="column" spacing={2}>
+        <Box sx={{ alignSelf: "flex-end" }}>
+          <Button variant="outlined" size="small">
+            Add Employee
+          </Button>
+        </Box>
 
-          <Stack gap={2}>
-            {response.map((employee) => (
-              <EmployeeCard key={employee.id} employee={employee} />
-            ))}
-          </Stack>
+        <Stack gap={2}>
+          {response.map((employee) => (
+            <EmployeeCard key={employee.id} employee={employee} />
+          ))}
         </Stack>
-      </Container>
-    </main>
+      </Stack>
+    </Box>
   );
 }

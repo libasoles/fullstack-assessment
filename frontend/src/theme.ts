@@ -12,6 +12,9 @@ const roboto = Roboto({
 const theme = createTheme({
   palette: {
     mode: "dark",
+    secondary: {
+      main: "#88cb8a",
+    },
     error: {
       main: "#ff6868",
     },

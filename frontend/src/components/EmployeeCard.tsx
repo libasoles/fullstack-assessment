@@ -1,7 +1,7 @@
+import { routes } from "@/app/routes";
 import { Employee } from "@/app/types/Employee";
 import { daysSince } from "@/utils/date";
 import DeleteIcon from "@mui/icons-material/Delete";
-import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
@@ -10,16 +10,16 @@ import CardContent from "@mui/material/CardContent";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import dayjs from "dayjs";
+import { EmployeeAvatar } from "./EmployeeAvatar";
 
 type EmployeeCardProps = {
   employee: Employee;
 };
 
 const EmployeeCard = ({ employee }: EmployeeCardProps) => {
-  const { firstName, lastName, department, hireDate } = employee;
+  const { id, firstName, lastName, department, hireDate } = employee;
 
   const formattedDate = dayjs(hireDate).format("MMMM D, YYYY");
-
   const formattedDuration = daysSince(hireDate);
 
   return (
@@ -28,7 +28,7 @@ const EmployeeCard = ({ employee }: EmployeeCardProps) => {
         <CardContent>
           <Stack direction="row" justifyContent="space-between">
             <Stack direction="row">
-              <Avatar src="/avatar.jpg" alt={firstName} />
+              <EmployeeAvatar src="/avatar.jpg" alt={firstName} />
               <Box ml={2}>
                 <Typography variant="h5" component="div" gutterBottom>
                   {firstName} {lastName}{" "}
@@ -49,7 +49,11 @@ const EmployeeCard = ({ employee }: EmployeeCardProps) => {
 
             <CardActions>
               <Stack justifyContent="flex-end" spacing={2}>
-                <Button size="small" variant="outlined">
+                <Button
+                  size="small"
+                  variant="outlined"
+                  href={routes.employee(id)}
+                >
                   View details
                 </Button>
                 <Button
