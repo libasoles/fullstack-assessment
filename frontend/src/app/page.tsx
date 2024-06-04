@@ -38,7 +38,7 @@ export default function Home() {
       <Container>
         <Stack direction="column" spacing={2}>
           <Box sx={{ alignSelf: "flex-end" }}>
-            <Button variant="text" size="small">
+            <Button variant="outlined" size="small">
               Add Employee
             </Button>
           </Box>

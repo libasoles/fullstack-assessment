@@ -1,11 +1,13 @@
 import { Employee } from "@/app/types/Employee";
 import { daysSince } from "@/utils/date";
 import DeleteIcon from "@mui/icons-material/Delete";
+import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
+import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import dayjs from "dayjs";
 
@@ -24,31 +26,43 @@ const EmployeeCard = ({ employee }: EmployeeCardProps) => {
     <Box sx={{ minWidth: 275 }}>
       <Card>
         <CardContent>
-          <Typography variant="h5" component="div" gutterBottom>
-            {firstName} {lastName}{" "}
-            <Typography color="text.secondary" component="span">
-              ({department.name})
-            </Typography>
-          </Typography>
+          <Stack direction="row" justifyContent="space-between">
+            <Stack direction="row">
+              <Avatar src="/avatar.jpg" alt={firstName} />
+              <Box ml={2}>
+                <Typography variant="h5" component="div" gutterBottom>
+                  {firstName} {lastName}{" "}
+                  <Typography color="text.secondary" component="span">
+                    ({department.name})
+                  </Typography>
+                </Typography>
 
-          <Typography color="text.secondary">Hire date</Typography>
-          <Typography variant="body2">
-            {formattedDate}{" "}
-            <Typography color="text.secondary" component="span">
-              ({formattedDuration})
-            </Typography>
-          </Typography>
+                <Typography color="text.secondary">Hire date</Typography>
+                <Typography variant="body2">
+                  {formattedDate}{" "}
+                  <Typography color="text.secondary" component="span">
+                    ({formattedDuration})
+                  </Typography>
+                </Typography>
+              </Box>
+            </Stack>
+
+            <CardActions>
+              <Stack justifyContent="flex-end" spacing={2}>
+                <Button size="small" variant="outlined">
+                  View details
+                </Button>
+                <Button
+                  size="small"
+                  color="error"
+                  startIcon={<DeleteIcon fontSize="small" />}
+                >
+                  Delete
+                </Button>
+              </Stack>
+            </CardActions>
+          </Stack>
         </CardContent>
-        <CardActions>
-          <Button size="small">View details</Button>
-          <Button
-            size="small"
-            color="error"
-            startIcon={<DeleteIcon fontSize="small" />}
-          >
-            Delete
-          </Button>
-        </CardActions>
       </Card>
     </Box>
   );
