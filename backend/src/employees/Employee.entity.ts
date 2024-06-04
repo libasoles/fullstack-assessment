@@ -41,6 +41,9 @@ export class Employee {
   @Column()
   address: string; // TODO: grab address from Address entity
 
+  @Column({ name: 'is_active' })
+  isActive: boolean;
+
   constructor(params?: ConstructorParams) {
     if (params) Object.assign(this, params);
   }

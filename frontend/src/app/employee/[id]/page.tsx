@@ -1,12 +1,12 @@
 "use client";
 
 import { useFetchEmployee } from "@/api/fetchEmployee";
+import DeactivationButton from "@/components/DeactivationButton";
 import { DepartmentSelect } from "@/components/DepartmentSelect";
 import { EmployeeAvatar } from "@/components/EmployeeAvatar";
 import { InfoRow } from "@/components/InfoRow";
 import Loading from "@/components/Loading";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import dayjs from "dayjs";
@@ -19,9 +19,12 @@ type Props = {
 export default function Employee({ params }: Props) {
   const { id } = params;
 
-  const { data: employee, isLoading } = useFetchEmployee({ id });
+  const { data: employee, isLoading, isError } = useFetchEmployee({ id });
 
   if (isLoading) return <Loading />;
+
+  // TODO: handle error somehow
+  if (isError || !employee) return <Loading />;
 
   const {
     avatar,
@@ -31,7 +34,7 @@ export default function Employee({ params }: Props) {
     address,
     hireDate,
     daysSinceHire,
-    isDeactivated,
+    isActive,
   } = employee as EmployeeType;
 
   const formattedDate = dayjs(hireDate).format("MMMM D, YYYY"); // TODO: move date format to config
@@ -43,7 +46,7 @@ export default function Employee({ params }: Props) {
           <EmployeeAvatar
             src={avatar}
             alt={firstName}
-            isDeactivated={isDeactivated}
+            isDeactivated={!isActive}
           />
           <Stack>
             <Typography variant="h5" component="div" gutterBottom>
@@ -66,13 +69,8 @@ export default function Employee({ params }: Props) {
               ({daysSinceHire})
             </Typography>
           </Box>
-          <Button
-            size="small"
-            variant="outlined"
-            color={isDeactivated ? "secondary" : "error"}
-          >
-            Deactivate
-          </Button>
+
+          <DeactivationButton employee={employee} isActive={isActive} />
         </Stack>
       </Stack>
     </Stack>

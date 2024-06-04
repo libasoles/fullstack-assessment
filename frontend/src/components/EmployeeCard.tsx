@@ -24,7 +24,7 @@ const EmployeeCard = ({ employee }: EmployeeCardProps) => {
     department,
     hireDate,
     daysSinceHire,
-    isDeactivated,
+    isActive,
   } = employee;
 
   const formattedDate = dayjs(hireDate).format("MMMM D, YYYY");
@@ -38,7 +38,7 @@ const EmployeeCard = ({ employee }: EmployeeCardProps) => {
               <EmployeeAvatar
                 src={avatar}
                 alt={firstName}
-                isDeactivated={isDeactivated}
+                isDeactivated={!isActive}
               />
               <Box ml={2}>
                 <Typography variant="h5" component="div" gutterBottom>

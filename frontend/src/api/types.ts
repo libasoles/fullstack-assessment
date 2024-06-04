@@ -12,5 +12,6 @@ namespace DTO {
     department: Department;
     phone: string;
     address: string;
+    isActive: boolean;
   }
 }

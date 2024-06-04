@@ -6,6 +6,7 @@ interface Props extends AvatarProps {
   isDeactivated?: boolean;
 }
 
+// TODO: solve visual glitch on activation change
 export const EmployeeAvatar = ({ isDeactivated = false, ...rest }: Props) => {
   const avatar = <Avatar {...rest} />;
 
