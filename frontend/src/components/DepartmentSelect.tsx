@@ -1,20 +1,14 @@
 "use client";
-import { useUpdateEmployee } from "@/api/updateDepartment";
+import { useFetchDepartments } from "@/api/fetchDepartments";
 import { Employee } from "@/app/types/Employee";
 import { SelectChangeEvent } from "@mui/material";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import { useState } from "react";
-
-const departments = [
-  { id: 1, name: "Sales" },
-  { id: 2, name: "HR" },
-  { id: 3, name: "Engineering" },
-];
+import UpdateButton from "./UpdateButton";
 
 type Props = {
   employee: Employee;
@@ -24,19 +18,15 @@ export const DepartmentSelect = ({ employee }: Props) => {
   const initialValue = employee.department.id;
   const [selected, setSelected] = useState<number>(initialValue);
 
-  const { mutate, isPending, isError } = useUpdateEmployee();
+  const { data: departments, isLoading, isError } = useFetchDepartments();
 
   const handleDepartmentChange = (event: SelectChangeEvent<number>) => {
     setSelected(Number(event.target.value));
   };
 
-  const handleUpdate = () => {
-    const updatedEmployee = { id: employee.id, department: { id: selected } };
-    mutate(updatedEmployee);
-  };
+  if (isLoading || isError || !departments) return null;
 
   const hasDeparmentChanged = selected !== initialValue;
-  const isButtonEnabled = hasDeparmentChanged && !isPending && !isError;
 
   return (
     <Box width="fit-content" minWidth={240}>
@@ -55,16 +45,11 @@ export const DepartmentSelect = ({ employee }: Props) => {
           ))}
         </Select>
 
-        <Button
-          size="small"
-          variant="contained"
-          color="secondary"
-          disabled={!isButtonEnabled}
-          sx={{ mt: 1 }}
-          onClick={handleUpdate}
-        >
-          Update
-        </Button>
+        <UpdateButton
+          employee={employee}
+          isEnabled={hasDeparmentChanged}
+          departmentId={selected}
+        />
       </FormControl>
     </Box>
   );
