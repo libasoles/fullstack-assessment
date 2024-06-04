@@ -1,7 +1,7 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
 
 const createDepartmentTable = `
-CREATE TABLE IF NOT EXISTS public.department
+CREATE TABLE IF NOT EXISTS department
 (
     id SERIAL PRIMARY KEY,
     name VARCHAR NOT NULL
@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS public.department
 `;
 
 const createEmployeeTable = `
-CREATE TABLE IF NOT EXISTS public.employee
+CREATE TABLE IF NOT EXISTS employee
 (
     id SERIAL PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
@@ -18,18 +18,18 @@ CREATE TABLE IF NOT EXISTS public.employee
     phone VARCHAR(50) NOT NULL,
     address VARCHAR NOT NULL,
     department_id INTEGER UNIQUE,
-    FOREIGN KEY (department_id) REFERENCES public.department(id)
+    FOREIGN KEY (department_id) REFERENCES department(id)
 )
 `;
 
 const createAddressTable = `
-CREATE TABLE IF NOT EXISTS public.address
+CREATE TABLE IF NOT EXISTS address
 (
     id SERIAL PRIMARY KEY,
     street VARCHAR(100) NOT NULL,
     zip_code VARCHAR(20) NOT NULL,
     employee_id INTEGER UNIQUE,
-    FOREIGN KEY (employee_id) REFERENCES public.employee(id)
+    FOREIGN KEY (employee_id) REFERENCES employee(id)
 )
 `;
 
@@ -41,8 +41,8 @@ export class CreateTables1717450696248 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.query(`DROP TABLE IF EXISTS public.address`);
-    await queryRunner.query(`DROP TABLE IF EXISTS public.employee`);
-    await queryRunner.query(`DROP TABLE IF EXISTS public.department`);
+    await queryRunner.query(`DROP TABLE IF EXISTS address`);
+    await queryRunner.query(`DROP TABLE IF EXISTS employee`);
+    await queryRunner.query(`DROP TABLE IF EXISTS department`);
   }
 }

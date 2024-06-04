@@ -16,7 +16,7 @@ export class Address {
   @Column()
   street: string;
 
-  @Column()
+  @Column({ name: 'zip_code' })
   zipCode: string;
 
   @OneToOne(() => Employee)

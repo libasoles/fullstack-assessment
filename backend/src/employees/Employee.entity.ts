@@ -7,22 +7,32 @@ import {
 } from 'typeorm';
 import { Department } from './Department.entity';
 
+type ConstructorParams = {
+  id?: number;
+  firstName: string;
+  lastName: string;
+  hireDate: Date;
+  department: Department;
+  phone: string;
+  address: string;
+};
+
 @Entity()
 export class Employee {
   @PrimaryGeneratedColumn()
-  id: number;
+  id?: number;
 
-  @Column()
+  @Column({ name: 'first_name' })
   firstName: string;
 
-  @Column()
+  @Column({ name: 'last_name' })
   lastName: string;
 
-  @Column()
+  @Column({ name: 'hire_date' })
   hireDate: Date; // TODO: choose correct type based on selected Dates library?
 
   @OneToOne(() => Department)
-  @JoinColumn()
+  @JoinColumn({ name: 'department_id' })
   department: Department;
 
   @Column()
@@ -30,4 +40,10 @@ export class Employee {
 
   @Column()
   address: string;
+
+  constructor(params?: ConstructorParams) {
+    if (params) {
+      Object.assign(this, params);
+    }
+  }
 }

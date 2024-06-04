@@ -1,9 +1,9 @@
 import { registerAs } from '@nestjs/config';
 import { config as dotenvConfig } from 'dotenv';
 import { DataSource, DataSourceOptions } from 'typeorm';
-import { Address } from '../employee/Address.entity';
-import { Department } from '../employee/Department.entity';
-import { Employee } from '../employee/Employee.entity';
+import { Address } from '../employees/Address.entity';
+import { Department } from '../employees/Department.entity';
+import { Employee } from '../employees/Employee.entity';
 
 dotenvConfig({ path: '.env' });
 

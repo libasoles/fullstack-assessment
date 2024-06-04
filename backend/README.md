@@ -2,6 +2,12 @@
 
 ## Requirements
 
+Install dependencies.
+
+`nvm use`
+
+`npm install`
+
 Project is dockerized, so you need to have Docker installed on your machine. Then run:
 
 `docker-compose up --build`
