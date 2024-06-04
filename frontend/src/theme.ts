@@ -1,4 +1,5 @@
 "use client";
+import darkScrollbar from "@mui/material/darkScrollbar";
 import { createTheme } from "@mui/material/styles";
 import { Roboto } from "next/font/google";
 
@@ -9,8 +10,25 @@ const roboto = Roboto({
 });
 
 const theme = createTheme({
+  palette: {
+    mode: "dark",
+  },
   typography: {
     fontFamily: roboto.style.fontFamily,
+  },
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          ...darkScrollbar,
+          color: "#e3e6e8",
+          backgroundColor: "#252627",
+          "& main": {
+            marginTop: 64,
+          },
+        },
+      },
+    },
   },
 });
 
