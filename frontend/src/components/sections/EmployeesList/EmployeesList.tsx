@@ -1,8 +1,8 @@
 "use client";
 import { useFetchEmployees } from "@/api/fetchEmployees";
-import EmployeeCard from "@/components/EmployeeCard";
+import Loading from "@/components/Loading";
 import Stack from "@mui/material/Stack";
-import Loading from "./Loading";
+import EmployeeCard from "./EmployeeCard";
 
 const EmployeesList = () => {
   const { data, isLoading, error } = useFetchEmployees();

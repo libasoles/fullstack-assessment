@@ -1,11 +1,11 @@
 "use client";
 
 import { useFetchEmployee } from "@/api/fetchEmployee";
-import DeactivationButton from "@/components/DeactivationButton";
-import { DepartmentSelect } from "@/components/DepartmentSelect";
 import { EmployeeAvatar } from "@/components/EmployeeAvatar";
-import { InfoRow } from "@/components/InfoRow";
 import Loading from "@/components/Loading";
+import { DepartmentSelect } from "@/components/sections/DepartmentSelect/DepartmentSelect";
+import DeactivationButton from "@/components/sections/EmployeeDetails/DeactivationButton";
+import { InfoRow } from "@/components/sections/EmployeeDetails/InfoRow";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";

@@ -1,5 +1,6 @@
 import { routes } from "@/app/routes";
 import { Employee } from "@/app/types/Employee";
+import { EmployeeAvatar } from "@/components/EmployeeAvatar";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -9,7 +10,6 @@ import CardContent from "@mui/material/CardContent";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import dayjs from "dayjs";
-import { EmployeeAvatar } from "./EmployeeAvatar";
 
 type EmployeeCardProps = {
   employee: Employee;
