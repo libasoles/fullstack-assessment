@@ -41,7 +41,7 @@ export default function Employee({ params }: Props) {
 
   return (
     <Stack spacing={4}>
-      <Stack direction="row" justifyContent="space-between">
+      <Stack direction={{ lg: "row" }} justifyContent="space-between">
         <Stack direction="row" spacing={2}>
           <EmployeeAvatar
             src={avatar}
@@ -61,7 +61,7 @@ export default function Employee({ params }: Props) {
             </Box>
           </Stack>
         </Stack>
-        <Stack spacing={4}>
+        <Stack spacing={4} sx={{ m: { xs: 8 } }}>
           <Box>
             <Typography color="text.secondary">Hire date</Typography>
             <Typography variant="body2">{formattedDate} </Typography>
