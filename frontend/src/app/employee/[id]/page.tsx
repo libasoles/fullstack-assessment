@@ -4,7 +4,7 @@ import { useFetchEmployee } from "@/api/fetchEmployee";
 import { DepartmentSelect } from "@/components/DepartmentSelect";
 import { EmployeeAvatar } from "@/components/EmployeeAvatar";
 import { InfoRow } from "@/components/InfoRow";
-import { daysSince } from "@/utils/date";
+import Loading from "@/components/Loading";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
@@ -21,25 +21,34 @@ export default function Employee({ params }: Props) {
 
   const { data, isLoading } = useFetchEmployee({ id });
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loading />;
 
-  const { firstName, lastName, department, phone, address, hireDate } =
-    data as EmployeeType;
+  const {
+    avatar,
+    firstName,
+    name,
+    department,
+    phone,
+    address,
+    hireDate,
+    daysSinceHire,
+    isDeactivated,
+  } = data as EmployeeType;
 
   const formattedDate = dayjs(hireDate).format("MMMM D, YYYY"); // TODO: move date format to config
-  const formattedDuration = daysSince(hireDate);
-
-  const isEmployeeDeactivated = true;
 
   return (
     <Stack spacing={4}>
       <Stack direction="row" justifyContent="space-between">
         <Stack direction="row" spacing={2}>
-          {/* TODO: move default image to config */}
-          <EmployeeAvatar src="/avatar.jpg" alt={firstName} />
+          <EmployeeAvatar
+            src={avatar}
+            alt={firstName}
+            isDeactivated={isDeactivated}
+          />
           <Stack>
             <Typography variant="h5" component="div" gutterBottom>
-              {firstName} {lastName}
+              {name()}
             </Typography>
 
             <InfoRow label="Telephone" value={phone} />
@@ -55,13 +64,13 @@ export default function Employee({ params }: Props) {
             <Typography color="text.secondary">Hire date</Typography>
             <Typography variant="body2">{formattedDate} </Typography>
             <Typography variant="body2" color="text.secondary">
-              ({formattedDuration})
+              ({daysSinceHire})
             </Typography>
           </Box>
           <Button
             size="small"
             variant="outlined"
-            color={isEmployeeDeactivated ? "secondary" : "error"}
+            color={isDeactivated ? "secondary" : "error"}
           >
             Deactivate
           </Button>
