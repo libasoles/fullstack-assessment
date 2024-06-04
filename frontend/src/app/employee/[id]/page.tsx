@@ -6,11 +6,14 @@ import Loading from "@/components/Loading";
 import { DepartmentSelect } from "@/components/sections/DepartmentSelect/DepartmentSelect";
 import DeactivationButton from "@/components/sections/EmployeeDetails/DeactivationButton";
 import { InfoRow } from "@/components/sections/EmployeeDetails/InfoRow";
+import { routes } from "@/config/routes";
+import { Employee as EmployeeType } from "@/types/Employee";
+import ChevronLeft from "@mui/icons-material/ChevronLeft";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import dayjs from "dayjs";
-import { Employee as EmployeeType } from "../../../types/Employee";
 
 type Props = {
   params: { id: number };
@@ -41,6 +44,17 @@ export default function Employee({ params }: Props) {
 
   return (
     <Stack spacing={4}>
+      <Box sx={{ alignSelf: "flex-end" }}>
+        <Button
+          variant="outlined"
+          size="small"
+          startIcon={<ChevronLeft />}
+          href={routes.home}
+        >
+          Go Back
+        </Button>
+      </Box>
+
       <Stack direction={{ lg: "row" }} justifyContent="space-between">
         <Stack direction="row" spacing={2}>
           <EmployeeAvatar
