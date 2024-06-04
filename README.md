@@ -7,3 +7,7 @@ Project is dockerized, so you need to have Docker installed on your machine. The
 `docker-compose up --build`
 
 Backend API runs on port 3001.
+
+## Database ER Diagram
+
+![ER Diagram](ERDiagram.png)
