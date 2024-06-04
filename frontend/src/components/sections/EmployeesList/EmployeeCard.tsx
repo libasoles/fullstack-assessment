@@ -1,6 +1,6 @@
-import { routes } from "@/app/routes";
-import { Employee } from "@/app/types/Employee";
 import { EmployeeAvatar } from "@/components/EmployeeAvatar";
+import { routes } from "@/config/routes";
+import { Employee } from "@/types/Employee";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";

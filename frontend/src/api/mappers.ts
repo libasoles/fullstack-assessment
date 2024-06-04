@@ -1,5 +1,5 @@
-import { Department } from "@/app/types/Department";
 import { Employee } from "@/app/types/Employee";
+import { Department } from "@/types/Department";
 import { daysSince } from "@/utils/date";
 import dayjs from "dayjs";
 

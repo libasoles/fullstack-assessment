@@ -1,5 +1,5 @@
-import { Department } from "@/app/types/Department";
 import config from "@/config/config";
+import { Department } from "@/types/Department";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { DEPARTMENTS } from "./queryKeys";
 

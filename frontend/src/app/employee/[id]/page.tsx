@@ -10,7 +10,7 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import dayjs from "dayjs";
-import { Employee as EmployeeType } from "../../types/Employee";
+import { Employee as EmployeeType } from "../../../types/Employee";
 
 type Props = {
   params: { id: number };
