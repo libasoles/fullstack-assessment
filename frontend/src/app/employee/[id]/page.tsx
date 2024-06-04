@@ -13,7 +13,6 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import dayjs from "dayjs";
 
 type Props = {
   params: { id: number };
@@ -32,15 +31,13 @@ export default function Employee({ params }: Props) {
   const {
     avatar,
     firstName,
-    name,
     phone,
     address,
-    hireDate,
     daysSinceHire,
     isActive,
+    name,
+    hireDate,
   } = employee as EmployeeType;
-
-  const formattedDate = dayjs(hireDate).format("MMMM D, YYYY"); // TODO: move date format to config
 
   return (
     <Stack spacing={4}>
@@ -78,7 +75,7 @@ export default function Employee({ params }: Props) {
         <Stack spacing={4} sx={{ m: { xs: 8 } }}>
           <Box>
             <Typography color="text.secondary">Hire date</Typography>
-            <Typography variant="body2">{formattedDate} </Typography>
+            <Typography variant="body2">{hireDate()} </Typography>
             <Typography variant="body2" color="text.secondary">
               ({daysSinceHire})
             </Typography>

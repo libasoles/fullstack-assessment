@@ -9,7 +9,6 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import dayjs from "dayjs";
 
 type EmployeeCardProps = {
   employee: Employee;
@@ -26,8 +25,6 @@ const EmployeeCard = ({ employee }: EmployeeCardProps) => {
     daysSinceHire,
     isActive,
   } = employee;
-
-  const formattedDate = dayjs(hireDate).format("MMMM D, YYYY");
 
   return (
     <Box sx={{ minWidth: 275 }}>
@@ -50,7 +47,7 @@ const EmployeeCard = ({ employee }: EmployeeCardProps) => {
 
                 <Typography color="text.secondary">Hire date</Typography>
                 <Typography variant="body2">
-                  {formattedDate}{" "}
+                  {hireDate()}{" "}
                   <Typography
                     variant="body2"
                     color="text.secondary"

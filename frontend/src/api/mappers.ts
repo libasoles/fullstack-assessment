@@ -1,5 +1,6 @@
-import { Employee } from "@/app/types/Employee";
+import config from "@/config/config";
 import { Department } from "@/types/Department";
+import { Employee } from "@/types/Employee";
 import { daysSince } from "@/utils/date";
 import dayjs from "dayjs";
 
@@ -13,11 +14,11 @@ export function mapEmployee(employee: DTO.Employee): Employee {
   return {
     ...employee,
     id: employee.id as number,
-    hireDate: dayjs(employee.hireDate),
     department: employee.department as Department,
     avatar: "/avatar.jpg", // TODO: use an actual existing image or grab it from server when possible
-    name: () => `${employee.firstName} ${employee.lastName}`,
     daysSinceHire: formattedDuration,
-    isDeactivated: false, // TODO: implement deactivation
+    name: () => `${employee.firstName} ${employee.lastName}`,
+    hireDate: (format = config.dates.format) =>
+      dayjs(employee.hireDate).format(format),
   };
 }
