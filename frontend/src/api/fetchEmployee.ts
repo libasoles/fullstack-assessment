@@ -2,6 +2,7 @@ import { Employee } from "@/app/types/Employee";
 import config from "@/config/config";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { mapEmployee } from "./mappers";
+import { EMPLOYEE } from "./queryKeys";
 
 async function fetchEmployee(id: Employee["id"]) {
   const res = await fetch(`${config.api.baseUrl}/employees/${id}`);
@@ -15,7 +16,7 @@ export function useFetchEmployee({
   id,
 }: useFetchEmployeeProps): UseQueryResult<Employee> {
   return useQuery({
-    queryKey: ["employee"],
+    queryKey: [EMPLOYEE],
     queryFn: () => fetchEmployee(id),
     select: mapEmployee,
   });

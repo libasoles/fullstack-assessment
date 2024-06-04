@@ -25,8 +25,22 @@ export class EmployeesService {
     });
   }
 
-  async update(employee: Partial<Employee>): Promise<Employee> {
-    return this.employeeRepository.save(employee);
+  async update(
+    id: number,
+    partialEmployee: Partial<Employee>,
+  ): Promise<Employee> {
+    const employeeToUpdate = await this.getOne(id);
+
+    if (!employeeToUpdate) {
+      throw new Error('Employee not found');
+    }
+
+    return this.employeeRepository.save(
+      new Employee({
+        ...employeeToUpdate,
+        ...partialEmployee,
+      }),
+    );
   }
 
   async delete(id: number) {

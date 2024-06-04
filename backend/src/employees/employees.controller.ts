@@ -4,8 +4,8 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
-  Put,
 } from '@nestjs/common';
 import { Employee } from './Employee.entity';
 import { EmployeesService } from './employees.service';
@@ -29,9 +29,12 @@ export class EmployeesController {
     return await this.employeesService.getOne(id);
   }
 
-  @Put()
-  async updateEmployee(@Body() employee: Employee) {
-    return await this.employeesService.update(employee);
+  @Patch(':id')
+  async updateEmployee(
+    @Param('id') id: number,
+    @Body() employee: Partial<Employee>,
+  ) {
+    return await this.employeesService.update(id, employee);
   }
 
   @Delete(':id')

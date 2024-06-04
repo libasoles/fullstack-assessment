@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 import { EmployeesController } from './employees.controller';
 import { EmployeesService } from './employees.service';
-import dbMocks from './mock.db';
+import dbMocks, { nonExistentEmployeeId } from './mock.db';
 import {
   anEmployee,
   anEmployeeWithoutId,
@@ -42,7 +42,10 @@ describe('EmployeesController', () => {
     });
 
     it('should update an employee', async () => {
-      const response = await controller.updateEmployee(anUpdatedEmployee);
+      const response = await controller.updateEmployee(
+        anUpdatedEmployee.id,
+        anUpdatedEmployee,
+      );
 
       expect(response).toEqual(anUpdatedEmployee);
     });
@@ -51,6 +54,14 @@ describe('EmployeesController', () => {
       const response = await controller.deleteEmployee(anEmployee.id);
 
       expect(response).toEqual({ affected: 1 });
+    });
+  });
+
+  describe('Error cases', () => {
+    it('should throw an exception when updating a non-existing employee', async () => {
+      await expect(
+        controller.updateEmployee(nonExistentEmployeeId, anUpdatedEmployee),
+      ).rejects.toThrow('Employee not found');
     });
   });
 });

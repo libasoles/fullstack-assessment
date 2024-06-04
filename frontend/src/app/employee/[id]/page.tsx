@@ -19,7 +19,7 @@ type Props = {
 export default function Employee({ params }: Props) {
   const { id } = params;
 
-  const { data, isLoading } = useFetchEmployee({ id });
+  const { data: employee, isLoading } = useFetchEmployee({ id });
 
   if (isLoading) return <Loading />;
 
@@ -27,13 +27,12 @@ export default function Employee({ params }: Props) {
     avatar,
     firstName,
     name,
-    department,
     phone,
     address,
     hireDate,
     daysSinceHire,
     isDeactivated,
-  } = data as EmployeeType;
+  } = employee as EmployeeType;
 
   const formattedDate = dayjs(hireDate).format("MMMM D, YYYY"); // TODO: move date format to config
 
@@ -55,7 +54,7 @@ export default function Employee({ params }: Props) {
             <InfoRow label="Address" value={address} />
 
             <Box mt={4}>
-              <DepartmentSelect initialValue={department} />
+              <DepartmentSelect employee={employee} />
             </Box>
           </Stack>
         </Stack>

@@ -1,7 +1,7 @@
 namespace DTO {
   interface Department {
     id: number;
-    name: string;
+    name?: string;
   }
 
   export interface Employee {

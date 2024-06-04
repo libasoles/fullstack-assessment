@@ -1,5 +1,6 @@
 "use client";
-import { Department } from "@/app/types/Department";
+import { useUpdateEmployee } from "@/api/updateDepartment";
+import { Employee } from "@/app/types/Employee";
 import { SelectChangeEvent } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -16,17 +17,26 @@ const departments = [
 ];
 
 type Props = {
-  initialValue: Department;
+  employee: Employee;
 };
 
-export const DepartmentSelect = ({ initialValue }: Props) => {
-  const [selected, setSelected] = useState<number>(initialValue.id);
+export const DepartmentSelect = ({ employee }: Props) => {
+  const initialValue = employee.department.id;
+  const [selected, setSelected] = useState<number>(initialValue);
+
+  const { mutate, isPending, isError } = useUpdateEmployee();
 
   const handleDepartmentChange = (event: SelectChangeEvent<number>) => {
     setSelected(Number(event.target.value));
   };
 
-  const hasDeparmentChanged = selected !== initialValue.id;
+  const handleUpdate = () => {
+    const updatedEmployee = { id: employee.id, department: { id: selected } };
+    mutate(updatedEmployee);
+  };
+
+  const hasDeparmentChanged = selected !== initialValue;
+  const isButtonEnabled = hasDeparmentChanged && !isPending && !isError;
 
   return (
     <Box width="fit-content" minWidth={240}>
@@ -49,8 +59,9 @@ export const DepartmentSelect = ({ initialValue }: Props) => {
           size="small"
           variant="contained"
           color="secondary"
-          disabled={!hasDeparmentChanged}
+          disabled={!isButtonEnabled}
           sx={{ mt: 1 }}
+          onClick={handleUpdate}
         >
           Update
         </Button>
