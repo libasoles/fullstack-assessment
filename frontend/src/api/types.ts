@@ -1,6 +1,6 @@
 namespace DTO {
   interface Department {
-    id?: number;
+    id: number;
     name: string;
   }
 
@@ -8,7 +8,7 @@ namespace DTO {
     id?: number;
     firstName: string;
     lastName: string;
-    hireDate: Date;
+    hireDate: string;
     department: Department;
     phone: string;
     address: string;

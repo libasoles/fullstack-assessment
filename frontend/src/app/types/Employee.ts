@@ -1,3 +1,5 @@
-export interface Employee extends DTO.Employee {
-  hireDate: Date;
+import { Dayjs } from "dayjs";
+
+export interface Employee extends Omit<DTO.Employee, "hireDate"> {
+  hireDate: Dayjs;
 }

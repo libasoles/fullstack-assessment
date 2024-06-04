@@ -19,7 +19,10 @@ export class EmployeesService {
   }
 
   async getOne(id: number): Promise<Employee> {
-    return this.employeeRepository.findOne({ where: { id } });
+    return this.employeeRepository.findOne({
+      where: { id },
+      relations: ['department'],
+    });
   }
 
   async update(employee: Partial<Employee>): Promise<Employee> {

@@ -1,3 +1,6 @@
+"use client";
+
+import { useFetchEmployee } from "@/api/fetchEmployee";
 import { DepartmentSelect } from "@/components/DepartmentSelect";
 import { EmployeeAvatar } from "@/components/EmployeeAvatar";
 import { InfoRow } from "@/components/InfoRow";
@@ -7,19 +10,7 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import dayjs from "dayjs";
-
-const employee = {
-  id: 8,
-  firstName: "Juan",
-  lastName: "De la Cruz",
-  hireDate: "2024-07-04T00:00:00.000Z",
-  department: {
-    id: 1,
-    name: "Sales",
-  },
-  phone: "(+54) 1234567890",
-  address: "Siempre Viva, 413",
-};
+import { Employee as EmployeeType } from "../../types/Employee";
 
 type Props = {
   params: { id: number };
@@ -27,10 +18,15 @@ type Props = {
 
 export default function Employee({ params }: Props) {
   const { id } = params;
-  const { firstName, lastName, department, phone, address, hireDate } =
-    employee;
 
-  const formattedDate = dayjs(hireDate).format("MMMM D, YYYY");
+  const { data, isLoading } = useFetchEmployee({ id });
+
+  if (isLoading) return <div>Loading...</div>;
+
+  const { firstName, lastName, department, phone, address, hireDate } =
+    data as EmployeeType;
+
+  const formattedDate = dayjs(hireDate).format("MMMM D, YYYY"); // TODO: move date format to config
   const formattedDuration = daysSince(hireDate);
 
   const isEmployeeDeactivated = true;
@@ -39,6 +35,7 @@ export default function Employee({ params }: Props) {
     <Stack spacing={4}>
       <Stack direction="row" justifyContent="space-between">
         <Stack direction="row" spacing={2}>
+          {/* TODO: move default image to config */}
           <EmployeeAvatar src="/avatar.jpg" alt={firstName} />
           <Stack>
             <Typography variant="h5" component="div" gutterBottom>

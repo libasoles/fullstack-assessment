@@ -6,7 +6,7 @@ import Stack from "@mui/material/Stack";
 const EmployeesList = () => {
   const { data, isLoading, error } = useFetchEmployees();
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <div>Loading...</div>; // TODO: encapsulate and improve loading
 
   return (
     <Stack gap={2}>

@@ -1,10 +1,7 @@
 import { Employee } from "@/app/types/Employee";
 import config from "@/config/config";
-import {
-  useQuery,
-  useQueryClient,
-  UseQueryResult,
-} from "@tanstack/react-query";
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
+import { mapEmployees } from "./mappers";
 
 async function fetchEmployees() {
   const res = await fetch(`${config.api.baseUrl}/employees`);
@@ -13,18 +10,9 @@ async function fetchEmployees() {
 }
 
 export function useFetchEmployees(): UseQueryResult<Employee[]> {
-  const queryClient = useQueryClient();
-
   return useQuery({
     queryKey: ["employees"],
     queryFn: fetchEmployees,
-    select: mapEmployee,
+    select: mapEmployees,
   });
-}
-
-function mapEmployee(employees: DTO.Employee[]): Employee[] {
-  return employees.map((employee) => ({
-    ...employee,
-    hireDate: new Date(employee.hireDate),
-  }));
 }

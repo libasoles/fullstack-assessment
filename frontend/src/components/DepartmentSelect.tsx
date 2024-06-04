@@ -1,4 +1,5 @@
 "use client";
+import { Department } from "@/app/types/Department";
 import { SelectChangeEvent } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -15,7 +16,7 @@ const departments = [
 ];
 
 type Props = {
-  initialValue: { id: number; name: string };
+  initialValue: Department;
 };
 
 export const DepartmentSelect = ({ initialValue }: Props) => {
