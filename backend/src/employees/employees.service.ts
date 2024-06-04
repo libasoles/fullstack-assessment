@@ -22,6 +22,10 @@ export class EmployeesService {
     return this.employeeRepository.findOne({ where: { id } });
   }
 
+  async update(employee: Partial<Employee>): Promise<Employee> {
+    return this.employeeRepository.save(employee);
+  }
+
   async delete(id: number) {
     const result = await this.employeeRepository.delete(id);
 
