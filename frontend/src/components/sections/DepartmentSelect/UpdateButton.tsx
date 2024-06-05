@@ -1,5 +1,5 @@
 import { useUpdateEmployee } from "@/api/updateDepartment";
-import { Employee } from "@/app/types/Employee";
+import { Employee } from "@/types/Employee";
 import Button from "@mui/material/Button";
 
 type Props = {

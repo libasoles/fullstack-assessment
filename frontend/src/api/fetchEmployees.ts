@@ -1,11 +1,11 @@
-import { Employee } from "@/app/types/Employee";
-import config from "@/config/config";
+import { Employee } from "@/types/Employee";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
+import { endpointFor } from "./endpoints";
 import { mapEmployees } from "./mappers";
 import { EMPLOYEES } from "./queryKeys";
 
 async function fetchEmployees() {
-  const res = await fetch(`${config.api.baseUrl}/employees`);
+  const res = await fetch(endpointFor.employees);
 
   return await res.json();
 }

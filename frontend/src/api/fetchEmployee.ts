@@ -1,5 +1,5 @@
-import { Employee } from "@/app/types/Employee";
 import config from "@/config/config";
+import { Employee } from "@/types/Employee";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { mapEmployee } from "./mappers";
 import { EMPLOYEE } from "./queryKeys";

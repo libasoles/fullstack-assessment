@@ -1,13 +1,15 @@
 "use client";
+
 import { useFetchEmployees } from "@/api/fetchEmployees";
 import Loading from "@/components/Loading";
 import Stack from "@mui/material/Stack";
 import EmployeeCard from "./EmployeeCard";
 
 const EmployeesList = () => {
-  const { data, isLoading, error } = useFetchEmployees();
+  const { data, isLoading, isError } = useFetchEmployees();
 
-  if (isLoading) return <Loading />;
+  // TODO: handle error better, providing feedback to the user
+  if (isLoading || isError) return <Loading />;
 
   return (
     <Stack gap={2}>

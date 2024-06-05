@@ -28,7 +28,7 @@ const EmployeeCard = ({ employee }: EmployeeCardProps) => {
 
   return (
     <Box sx={{ minWidth: 275 }}>
-      <Card>
+      <Card role="listitem">
         <CardContent>
           <Stack direction="row" justifyContent="space-between">
             <Stack direction="row">

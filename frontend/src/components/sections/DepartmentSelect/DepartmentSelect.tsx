@@ -1,6 +1,6 @@
 "use client";
 import { useFetchDepartments } from "@/api/fetchDepartments";
-import { Employee } from "@/app/types/Employee";
+import { Employee } from "@/types/Employee";
 import { SelectChangeEvent } from "@mui/material";
 import Box from "@mui/material/Box";
 import FormControl from "@mui/material/FormControl";
