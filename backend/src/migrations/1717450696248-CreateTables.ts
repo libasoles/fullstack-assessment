@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS employee
     hire_date DATE NOT NULL,
     phone VARCHAR(50) NOT NULL,
     address VARCHAR NOT NULL,
-    department_id INTEGER UNIQUE,
+    department_id INTEGER NOT NULL,
     FOREIGN KEY (department_id) REFERENCES department(id)
 )
 `;
