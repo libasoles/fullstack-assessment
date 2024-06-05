@@ -1,3 +1,4 @@
+import ConfirmDialog from "@/components/ConfirmDialog";
 import { EmployeeAvatar } from "@/components/EmployeeAvatar";
 import { routes } from "@/config/routes";
 import { Employee } from "@/types/Employee";
@@ -68,13 +69,20 @@ const EmployeeCard = ({ employee }: EmployeeCardProps) => {
                 >
                   View details
                 </Button>
-                <Button
-                  size="small"
-                  color="error"
-                  startIcon={<DeleteIcon fontSize="small" />}
-                >
-                  Delete
-                </Button>
+
+                <ConfirmDialog
+                  explanation="The employee will not be displayed in the system anymore, so you won't be able to recover it."
+                  trigger={({ onClick: handleClick }) => (
+                    <Button
+                      size="small"
+                      color="error"
+                      startIcon={<DeleteIcon fontSize="small" />}
+                      onClick={handleClick}
+                    >
+                      Delete
+                    </Button>
+                  )}
+                />
               </Stack>
             </CardActions>
           </Stack>

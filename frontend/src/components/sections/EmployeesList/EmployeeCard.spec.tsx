@@ -4,6 +4,7 @@ import { render, screen } from "@testing-library/react";
 import EmployeeCard from "./EmployeeCard";
 
 const anEmployee = createEmployee({
+  id: 13,
   firstName: "John",
   lastName: "Doe",
   department: { id: 1, name: "Engineering" },
@@ -33,5 +34,7 @@ describe("Employee card", () => {
 
     expect(viewButton).toBeInTheDocument();
     expect(deleteButton).toBeInTheDocument();
+
+    expect(viewButton).toHaveProperty("href", "http://localhost/employee/13");
   });
 });
