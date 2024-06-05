@@ -12,10 +12,11 @@ type TriggerProps = {
 
 type Props = {
   trigger: (props: TriggerProps) => React.ReactElement;
+  onConfirm: () => void;
   explanation?: string;
 };
 
-const ConfirmDialog = ({ trigger, explanation }: Props) => {
+const ConfirmDialog = ({ trigger, onConfirm, explanation }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleOpen = () => {
@@ -43,7 +44,13 @@ const ConfirmDialog = ({ trigger, explanation }: Props) => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose} autoFocus>
+          <Button
+            onClick={() => {
+              handleClose();
+              onConfirm();
+            }}
+            autoFocus
+          >
             OK
           </Button>
         </DialogActions>

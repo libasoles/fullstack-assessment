@@ -1,9 +1,9 @@
-import config from "@/config/config";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { endpointFor } from "./endpoints";
 import { EMPLOYEE, EMPLOYEES } from "./queryKeys";
 
 async function updateEmployee(data: Partial<DTO.Employee>) {
-  return fetch(`${config.api.baseUrl}/employees/${data.id}`, {
+  return fetch(endpointFor.employee(data.id as number), {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",

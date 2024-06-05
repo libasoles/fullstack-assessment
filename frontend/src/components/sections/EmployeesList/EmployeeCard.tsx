@@ -1,8 +1,6 @@
-import ConfirmDialog from "@/components/ConfirmDialog";
 import { EmployeeAvatar } from "@/components/EmployeeAvatar";
 import { routes } from "@/config/routes";
 import { Employee } from "@/types/Employee";
-import DeleteIcon from "@mui/icons-material/Delete";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
@@ -10,6 +8,7 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import DeleteEmployeeButton from "./DeleteEmployeeButton";
 
 type EmployeeCardProps = {
   employee: Employee;
@@ -70,19 +69,7 @@ const EmployeeCard = ({ employee }: EmployeeCardProps) => {
                   View details
                 </Button>
 
-                <ConfirmDialog
-                  explanation="The employee will not be displayed in the system anymore, so you won't be able to recover it."
-                  trigger={({ onClick: handleClick }) => (
-                    <Button
-                      size="small"
-                      color="error"
-                      startIcon={<DeleteIcon fontSize="small" />}
-                      onClick={handleClick}
-                    >
-                      Delete
-                    </Button>
-                  )}
-                />
+                <DeleteEmployeeButton employee={employee} />
               </Stack>
             </CardActions>
           </Stack>
