@@ -39,6 +39,7 @@ export class EmployeesService {
       new Employee({
         ...employeeToUpdate,
         ...partialEmployee,
+        id,
       }),
     );
   }
