@@ -8,13 +8,16 @@
  * Consider migrating to a more modern test runner if
  * you don't want to deal with this.
  */
+
 import { ReadableStream } from "node:stream/web";
+import { clearImmediate } from "node:timers";
 import { TextDecoder, TextEncoder } from "node:util";
 
 Object.defineProperties(globalThis, {
   TextDecoder: { value: TextDecoder },
   TextEncoder: { value: TextEncoder },
   ReadableStream: { value: ReadableStream },
+  clearImmediate: { value: clearImmediate },
 });
 
 import { Blob, File } from "node:buffer";
@@ -28,4 +31,8 @@ Object.defineProperties(globalThis, {
   FormData: { value: FormData },
   Request: { value: Request },
   Response: { value: Response },
+});
+
+Object.defineProperties(globalThis, {
+  clearImmediate: { value: clearImmediate },
 });

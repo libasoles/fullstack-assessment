@@ -3,7 +3,7 @@
 import { useFetchEmployee } from "@/api/fetchEmployee";
 import { EmployeeAvatar } from "@/components/EmployeeAvatar";
 import Loading from "@/components/Loading";
-import { DepartmentSelect } from "@/components/sections/DepartmentSelect/DepartmentSelect";
+import DepartmentForm from "@/components/sections/DepartmentSelect/DepartmentForm";
 import DeactivationButton from "@/components/sections/EmployeeDetails/DeactivationButton";
 import { InfoRow } from "@/components/sections/EmployeeDetails/InfoRow";
 import { routes } from "@/config/routes";
@@ -40,7 +40,7 @@ export default function Employee({ params }: Props) {
   } = employee as EmployeeType;
 
   return (
-    <Stack spacing={4}>
+    <Stack spacing={4} data-testid="employee-details-view">
       <Box sx={{ alignSelf: "flex-end" }}>
         <Button
           variant="outlined"
@@ -68,7 +68,7 @@ export default function Employee({ params }: Props) {
             <InfoRow label="Address" value={address} />
 
             <Box mt={4}>
-              <DepartmentSelect employee={employee} />
+              <DepartmentForm employee={employee} />
             </Box>
           </Stack>
         </Stack>

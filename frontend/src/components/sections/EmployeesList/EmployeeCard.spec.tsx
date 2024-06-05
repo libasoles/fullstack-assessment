@@ -1,5 +1,5 @@
 import { createEmployee } from "@/mocks/client.factory";
-import MockedProviders from "@/mocks/queryClient";
+import ClientProviders from "@/providers/clientProviders";
 import { render, screen } from "@testing-library/react";
 import EmployeeCard from "./EmployeeCard";
 
@@ -15,9 +15,9 @@ const anEmployee = createEmployee({
 describe("Employee card", () => {
   beforeEach(() => {
     render(
-      <MockedProviders>
+      <ClientProviders>
         <EmployeeCard employee={anEmployee} />
-      </MockedProviders>
+      </ClientProviders>
     );
   });
 

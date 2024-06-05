@@ -3,6 +3,7 @@ import ConfirmDialog from "@/components/ConfirmDialog";
 import { Employee } from "@/types/Employee";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Button from "@mui/material/Button";
+import DialogContentText from "@mui/material/DialogContentText";
 
 type Props = {
   employee: Employee;
@@ -17,7 +18,6 @@ const DeleteEmployeeButton = ({ employee }: Props) => {
 
   return (
     <ConfirmDialog
-      explanation="The employee will not be displayed in the system anymore, so you won't be able to recover it."
       trigger={({ onClick: handleClick }) => (
         <Button
           size="small"
@@ -29,7 +29,13 @@ const DeleteEmployeeButton = ({ employee }: Props) => {
         </Button>
       )}
       onConfirm={handleConfirm}
-    />
+    >
+      <DialogContentText id="dialog-description">
+        {
+          "The employee will not be displayed in the system anymore, so you won't be able to recover it."
+        }
+      </DialogContentText>
+    </ConfirmDialog>
   );
 };
 

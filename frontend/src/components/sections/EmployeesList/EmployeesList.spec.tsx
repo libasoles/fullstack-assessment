@@ -1,14 +1,14 @@
 import EmployeesList from "@/components/sections/EmployeesList/EmployeesList";
-import MockedProviders from "@/mocks/queryClient";
+import ClientProviders from "@/providers/clientProviders";
 import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 describe("List of employees", () => {
   beforeEach(() => {
     render(
-      <MockedProviders>
+      <ClientProviders>
         <EmployeesList />
-      </MockedProviders>
+      </ClientProviders>
     );
   });
 
@@ -23,31 +23,33 @@ describe("List of employees", () => {
     });
   });
 
-  it("should display a confirmation dialog when clicking on delete employee button", async () => {
-    await clickDeleteButton();
+  describe("Delete employee", () => {
+    it("should display a confirmation dialog when clicking on delete employee button", async () => {
+      await clickDeleteButton();
 
-    await waitFor(() => {
-      const dialog = screen.getByRole("dialog");
+      await waitFor(() => {
+        const dialog = screen.getByRole("dialog");
 
-      expect(dialog).toBeInTheDocument();
-      expect(dialog).toHaveTextContent("Are you sure?");
-      expect(dialog).toHaveTextContent(
-        "The employee will not be displayed in the system anymore, so you won't be able to recover it."
-      );
+        expect(dialog).toBeInTheDocument();
+        expect(dialog).toHaveTextContent("Are you sure?");
+        expect(dialog).toHaveTextContent(
+          "The employee will not be displayed in the system anymore, so you won't be able to recover it."
+        );
+      });
     });
-  });
 
-  it("should delete an employee when confirming the dialog", async () => {
-    await clickDeleteButton();
+    it("should delete an employee when confirming the dialog", async () => {
+      await clickDeleteButton();
 
-    await clickConfirmButton();
+      await clickConfirmButton();
 
-    await waitFor(() => {
-      const employees = screen.getAllByRole("listitem");
-      const firstEmployee = employees[0];
+      await waitFor(() => {
+        const employees = screen.getAllByRole("listitem");
+        const firstEmployee = employees[0];
 
-      expect(employees).toHaveLength(2);
-      expect(firstEmployee).not.toHaveTextContent("John Doe");
+        expect(employees).toHaveLength(2);
+        expect(firstEmployee).not.toHaveTextContent("John Doe");
+      });
     });
   });
 });

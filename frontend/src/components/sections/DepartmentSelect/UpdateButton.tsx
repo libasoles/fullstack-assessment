@@ -23,11 +23,12 @@ const UpdateButton = ({ employee, isEnabled, departmentId }: Props) => {
 
   return (
     <Button
+      fullWidth
       size="small"
       variant="contained"
       color="secondary"
       disabled={isDisabled}
-      sx={{ mt: 1 }}
+      sx={{ mt: 2 }}
       onClick={handleUpdate}
     >
       Update

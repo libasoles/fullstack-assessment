@@ -14,7 +14,7 @@ type Props = {
   employee: Employee;
 };
 
-export const DepartmentSelect = ({ employee }: Props) => {
+const DepartmentForm = ({ employee }: Props) => {
   const initialValue = employee.department.id;
   const [selected, setSelected] = useState<number>(initialValue);
 
@@ -54,3 +54,5 @@ export const DepartmentSelect = ({ employee }: Props) => {
     </Box>
   );
 };
+
+export default DepartmentForm;

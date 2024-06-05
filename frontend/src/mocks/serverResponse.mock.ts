@@ -14,6 +14,14 @@ export const handlers = [
   http.get(endpointFor.employees, () => {
     return HttpResponse.json(fakeDB.employees);
   }),
+  http.get(endpointFor.departments, () => {
+    return HttpResponse.json([
+      { id: 1, name: "Engineering" },
+      { id: 2, name: "Marketing" },
+      { id: 3, name: "Sales" },
+      { id: 4, name: "Finance" },
+    ]);
+  }),
   http.delete(endpointFor.employee(1), () => {
     fakeDB.employees = fakeDB.employees.filter((employee) => employee.id !== 1);
 
