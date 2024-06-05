@@ -8,9 +8,10 @@ import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { Dayjs } from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import { useFormik } from "formik";
 import { PropsWithChildren } from "react";
+import { z, ZodError } from "zod";
 import { DepartmentsSelect } from "../DepartmentSelect/DepartmentsSelect";
 
 const initialValues = {
@@ -22,16 +23,48 @@ const initialValues = {
   department: undefined,
 };
 
-type FormikValues = Omit<DTO.Employee, "hireDate" | "department"> & {
+const validationSchema = z.object({
+  firstName: z
+    .string()
+    .min(3, "First name is too short")
+    .max(50, "First name is too long"),
+  lastName: z
+    .string()
+    .min(3, "Username is too short")
+    .max(50, "Username is too long"),
+  phone: z.string().min(3, "Phone is too short").max(20, "Phone is too long"),
+  address: z
+    .string()
+    .min(3, "Address is too short")
+    .max(255, "Address is too long"),
+  department: z.number().int(),
+  hireDate: z
+    .custom<Dayjs>((val) => val instanceof dayjs, "Invalid date")
+    .refine((data) => data < dayjs(Date.now()), {
+      message: "Can't be future date",
+    }),
+});
+
+type FormValues = Omit<DTO.Employee, "hireDate" | "department"> & {
   hireDate: Dayjs | null;
   department?: DTO.Department;
 };
 
 const AddNewEmployeeButton = () => {
-  const { mutate } = useCreateEmployee();
+  const { mutate, data, isError } = useCreateEmployee();
 
-  // TODO: add fields validation (with yup or another library)
-  const handleSubmit = (values: FormikValues) => {
+  const validateForm = (values: FormValues) => {
+    try {
+      validationSchema.parse(values);
+    } catch (error) {
+      console.log({ error });
+      if (error instanceof ZodError) {
+        return error.formErrors.fieldErrors;
+      }
+    }
+  };
+
+  const handleSubmit = (values: FormValues) => {
     const newEmployee = {
       ...values,
       hireDate: values.hireDate?.toISOString(),
@@ -40,9 +73,11 @@ const AddNewEmployeeButton = () => {
     mutate(newEmployee as DTO.Employee);
   };
 
-  const formik = useFormik<FormikValues>({
+  const formik = useFormik<FormValues>({
     initialValues,
+    validate: validateForm,
     onSubmit: handleSubmit,
+    validateOnBlur: true,
   });
 
   const handleConfirm = () => {
@@ -50,6 +85,9 @@ const AddNewEmployeeButton = () => {
   };
 
   const isDialogFullWidth = useMediaQuery("(max-width:600px)");
+
+  const isSubmitButtonDisabled =
+    !formik.dirty || !formik.isValid || !validateForm(formik.values);
 
   return (
     <ConfirmDialog
@@ -61,12 +99,7 @@ const AddNewEmployeeButton = () => {
       )}
       onConfirm={handleConfirm}
       fullScreen={isDialogFullWidth}
-      isDisabled={
-        !formik.dirty ||
-        !formik.isValid ||
-        !formik.values.hireDate ||
-        !formik.values.department
-      }
+      isDisabled={isSubmitButtonDisabled}
     >
       <form role="form">
         <Box sx={{ minWidth: { sm: 500 } }}>
@@ -78,6 +111,11 @@ const AddNewEmployeeButton = () => {
               fullWidth
               onChange={formik.handleChange}
               value={formik.values.firstName}
+              onBlur={formik.handleBlur}
+              helperText={formik.touched.firstName && formik.errors.firstName}
+              error={
+                formik.touched.firstName && Boolean(formik.errors.firstName)
+              }
             />
             <TextField
               label="Last name"
@@ -86,6 +124,9 @@ const AddNewEmployeeButton = () => {
               fullWidth
               onChange={formik.handleChange}
               value={formik.values.lastName}
+              onBlur={formik.handleBlur}
+              helperText={formik.touched.lastName && formik.errors.lastName}
+              error={formik.touched.lastName && Boolean(formik.errors.lastName)}
             />
           </PairOfFields>
 
@@ -97,6 +138,9 @@ const AddNewEmployeeButton = () => {
               fullWidth
               onChange={formik.handleChange}
               value={formik.values.phone}
+              onBlur={formik.handleBlur}
+              helperText={formik.touched.phone && formik.errors.phone}
+              error={formik.touched.phone && Boolean(formik.errors.phone)}
             />
             <TextField
               label="Address"
@@ -105,28 +149,43 @@ const AddNewEmployeeButton = () => {
               fullWidth
               onChange={formik.handleChange}
               value={formik.values.address}
+              onBlur={formik.handleBlur}
+              helperText={formik.touched.address && formik.errors.address}
+              error={formik.touched.address && Boolean(formik.errors.address)}
             />
           </PairOfFields>
 
           <PairOfFields>
             <DepartmentsSelect
               name="department"
+              value={formik.values.department?.id}
               onChange={(department) => {
                 formik.setFieldValue("department", department);
               }}
-              value={formik.values.department?.id}
+              onBlur={formik.handleBlur}
+              helperText={formik.touched.department && formik.errors.department}
+              error={
+                formik.touched.department && Boolean(formik.errors.department)
+              }
             />
 
             <DatePicker
               label="Hire date"
               name="hireDate"
-              slotProps={{
-                textField: { variant: "standard", fullWidth: true },
-              }}
+              value={formik.values.hireDate}
+              disableFuture
               onChange={(value) => {
                 formik.setFieldValue("hireDate", value);
+                formik.validateField("hireDate");
               }}
-              value={formik.values.hireDate}
+              slotProps={{
+                textField: {
+                  variant: "standard",
+                  fullWidth: true,
+                  error: formik.touched.hireDate && !!formik.errors.hireDate,
+                  helperText: formik.touched.hireDate && formik.errors.hireDate,
+                },
+              }}
             />
           </PairOfFields>
         </Box>

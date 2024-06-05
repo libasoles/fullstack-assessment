@@ -3,6 +3,7 @@
 import { useFetchDepartments } from "@/api/fetchDepartments";
 import { Department } from "@/types/Department";
 import FormControl from "@mui/material/FormControl";
+import FormHelperText from "@mui/material/FormHelperText";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select, { SelectChangeEvent, SelectProps } from "@mui/material/Select";
@@ -11,12 +12,15 @@ import { ReactNode } from "react";
 type Props = {
   value?: number | "";
   onChange: (value: Department) => void;
+  helperText?: string | false;
 } & SelectProps<number>;
 
 export const DepartmentsSelect = ({
   name,
   value,
   onChange,
+  helperText,
+  error,
   ...rest
 }: Props) => {
   const { data: departments, isLoading, isError } = useFetchDepartments();
@@ -40,6 +44,7 @@ export const DepartmentsSelect = ({
         name={name}
         value={value}
         onChange={handleChange}
+        error={error}
         {...rest}
       >
         {departments.map((department) => (
@@ -48,6 +53,11 @@ export const DepartmentsSelect = ({
           </MenuItem>
         ))}
       </Select>
+      {error && helperText && (
+        <FormHelperText error component="div">
+          {helperText}
+        </FormHelperText>
+      )}
     </FormControl>
   );
 };

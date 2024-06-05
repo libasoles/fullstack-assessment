@@ -48,7 +48,8 @@ const EmployeeDetails = ({ employeeId: id }: Props) => {
           </Box>
         </Stack>
       </Stack>
-      <Stack spacing={4} sx={{ m: { xs: 8, sm: 0 } }}>
+
+      <Stack spacing={4} sx={{ m: { xs: 8, sm: 0 } }} minWidth={100}>
         <Box>
           <Typography color="text.secondary">Hire date</Typography>
           <Typography variant="body2">{hireDate()} </Typography>
