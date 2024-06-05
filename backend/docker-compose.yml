@@ -25,7 +25,7 @@ services:
     volumes:
         - ./src:/app/src 
     working_dir: /app
-    command: sh -c "ls && pwd && ./scripts/wait-for-it.sh db:${DB_PORT} -- ./scripts/startup.sh"
+    command: sh -c "./scripts/wait-for-it.sh db:${DB_PORT} -- ./scripts/startup-dev.sh"
   pgadmin:
     image: dpage/pgadmin4 
     restart: always 
