@@ -1,5 +1,5 @@
 namespace DTO {
-  interface Department {
+  export interface Department {
     id: number;
     name?: string;
   }
@@ -12,6 +12,6 @@ namespace DTO {
     department: Department;
     phone: string;
     address: string;
-    isActive: boolean;
+    isActive?: boolean;
   }
 }

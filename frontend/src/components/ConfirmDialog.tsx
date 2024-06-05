@@ -13,6 +13,7 @@ type TriggerProps = {
 
 interface Props extends Omit<DialogProps, "open"> {
   title?: string;
+  isDisabled?: boolean;
   trigger: (props: TriggerProps) => React.ReactElement;
   onConfirm: () => void;
 }
@@ -23,6 +24,7 @@ const ConfirmDialog = ({
   onConfirm,
   children,
   fullScreen,
+  isDisabled = false,
   ...rest
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -70,6 +72,7 @@ const ConfirmDialog = ({
               onConfirm();
             }}
             autoFocus
+            disabled={isDisabled}
           >
             OK
           </Button>

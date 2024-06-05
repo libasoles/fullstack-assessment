@@ -1,35 +1,46 @@
 "use client";
+
 import { useFetchDepartments } from "@/api/fetchDepartments";
-import { SelectChangeEvent } from "@mui/material";
+import { Department } from "@/types/Department";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
-import { useState } from "react";
+import Select, { SelectChangeEvent, SelectProps } from "@mui/material/Select";
+import { ReactNode } from "react";
 
 type Props = {
-  initialValue?: number;
-};
+  value?: number | "";
+  onChange: (value: Department) => void;
+} & SelectProps<number>;
 
-export const DepartmentsSelect = ({ initialValue }: Props) => {
-  const [selected, setSelected] = useState<number | "">(initialValue || "");
-
+export const DepartmentsSelect = ({
+  name,
+  value,
+  onChange,
+  ...rest
+}: Props) => {
   const { data: departments, isLoading, isError } = useFetchDepartments();
 
-  const handleDepartmentChange = (event: SelectChangeEvent<number>) => {
-    setSelected(Number(event.target.value));
-  };
-
   if (isLoading || isError || !departments) return null;
+
+  const handleChange = (event: SelectChangeEvent<number>, child: ReactNode) => {
+    const department = departments.find(
+      (department) => department.id === Number(event.target.value)
+    );
+
+    if (department) onChange(department);
+  };
 
   return (
     <FormControl fullWidth variant="standard">
       <InputLabel id="department-label">Department</InputLabel>
       <Select
         labelId="department-label"
-        value={selected}
         label="Department"
-        onChange={handleDepartmentChange}
+        name={name}
+        value={value}
+        onChange={handleChange}
+        {...rest}
       >
         {departments.map((department) => (
           <MenuItem key={department.id} value={department.id}>
