@@ -1,3 +1,4 @@
+import { IsBoolean, IsNotEmpty, MaxLength } from 'class-validator';
 import {
   Column,
   Entity,
@@ -22,25 +23,36 @@ export class Employee {
   @PrimaryGeneratedColumn()
   id?: number;
 
+  @IsNotEmpty()
+  @MaxLength(50)
   @Column({ name: 'first_name' })
   firstName: string;
 
+  @IsNotEmpty()
+  @MaxLength(50)
   @Column({ name: 'last_name' })
   lastName: string;
 
+  @IsNotEmpty()
   @Column({ name: 'hire_date' })
   hireDate: Date;
 
+  @IsNotEmpty()
   @OneToOne(() => Department)
   @JoinColumn({ name: 'department_id' })
   department: Department;
 
+  @IsNotEmpty()
+  @MaxLength(50)
   @Column()
   phone: string;
 
+  @IsNotEmpty()
+  @MaxLength(50)
   @Column()
   address: string; // TODO: grab address from Address entity
 
+  @IsBoolean()
   @Column({ name: 'is_active' })
   isActive: boolean;
 

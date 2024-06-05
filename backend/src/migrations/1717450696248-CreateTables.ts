@@ -4,7 +4,7 @@ const createDepartmentTable = `
 CREATE TABLE IF NOT EXISTS department
 (
     id SERIAL PRIMARY KEY,
-    name VARCHAR NOT NULL
+    name VARCHAR(50) NOT NULL
 )
 `;
 
