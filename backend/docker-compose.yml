@@ -24,6 +24,8 @@ services:
       - db 
     volumes:
         - ./src:/app/src 
+    working_dir: /app
+    command: sh -c "./node_modules/.bin/ts-node ./node_modules/typeorm/cli migration:run -d ./src/config/typeorm.ts && npm run start:dev"
   pgadmin:
     image: dpage/pgadmin4 
     restart: always 
