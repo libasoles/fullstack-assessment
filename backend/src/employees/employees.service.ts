@@ -30,7 +30,6 @@ export class EmployeesService {
     partialEmployee: Partial<Employee>,
   ): Promise<Employee> {
     const employeeToUpdate = await this.getOne(id);
-
     if (!employeeToUpdate) {
       throw new Error('Employee not found');
     }
@@ -39,7 +38,7 @@ export class EmployeesService {
       new Employee({
         ...employeeToUpdate,
         ...partialEmployee,
-        id,
+        id: Number(id),
       }),
     );
   }
