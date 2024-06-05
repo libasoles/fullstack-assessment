@@ -4,9 +4,9 @@ import utc from "dayjs/plugin/utc";
 import { daysSince } from "./date";
 
 describe("duration", () => {
-  beforeEach(() => {
-    const mockedDate = new Date("2024-7-1");
+  const mockedDate = new Date("2024-7-1");
 
+  beforeEach(() => {
     dayjs.extend(utc);
     dayjs.extend(timezone);
     dayjs.tz.setDefault("UTC");
@@ -49,5 +49,13 @@ describe("duration", () => {
     const timePeriod = daysSince(aDate);
 
     expect(timePeriod).toEqual("1m - 5d");
+  });
+
+  it("should return 'today' if the date is today", () => {
+    const today = dayjs(mockedDate);
+
+    const timePeriod = daysSince(today);
+
+    expect(timePeriod).toEqual("today");
   });
 });

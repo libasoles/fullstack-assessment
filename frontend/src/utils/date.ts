@@ -28,5 +28,7 @@ export const daysSince: DaySince = (aDate) => {
     .filter(Boolean)
     .join(separator);
 
+  if (!formattedDuration) return "today";
+
   return formattedDuration;
 };
