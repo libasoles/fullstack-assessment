@@ -7,7 +7,6 @@ import NoContent from "@/components/NoContent";
 import DepartmentForm from "@/components/sections/DepartmentSelect/DepartmentForm";
 import DeactivationButton from "@/components/sections/EmployeeDetails/DeactivationButton";
 import { InfoRow } from "@/components/sections/EmployeeDetails/InfoRow";
-import { Employee as EmployeeType } from "@/types/Employee";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
@@ -25,29 +24,17 @@ const EmployeeDetails = ({ employeeId: id }: Props) => {
     return (
       <NoContent
         variant="error"
-        message="We Couldn't retrieve the employee data. Make sure you have the correct link"
+        message="We couldn't retrieve the employee data. Make sure you have the correct link."
       />
     );
 
-  const {
-    avatar,
-    firstName,
-    phone,
-    address,
-    daysSinceHire,
-    isActive,
-    name,
-    hireDate,
-  } = employee as EmployeeType;
+  const { firstName, phone, address, daysSinceHire, isActive, name, hireDate } =
+    employee;
 
   return (
     <Stack direction={{ lg: "row" }} justifyContent="space-between">
-      <Stack direction="row" spacing={2}>
-        <EmployeeAvatar
-          src={avatar}
-          alt={firstName}
-          isDeactivated={!isActive}
-        />
+      <Stack direction="row" spacing={4}>
+        <EmployeeAvatar alt={firstName} isDeactivated={!isActive} />
         <Stack>
           <Typography variant="h5" component="div" gutterBottom>
             {name()}
@@ -61,7 +48,7 @@ const EmployeeDetails = ({ employeeId: id }: Props) => {
           </Box>
         </Stack>
       </Stack>
-      <Stack spacing={4} sx={{ m: { xs: 8 } }}>
+      <Stack spacing={4} sx={{ m: { xs: 8, sm: 0 } }}>
         <Box>
           <Typography color="text.secondary">Hire date</Typography>
           <Typography variant="body2">{hireDate()} </Typography>

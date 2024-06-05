@@ -9,13 +9,23 @@ interface Props extends AvatarProps {
 }
 
 // TODO: solve visual glitch on activation change
-export const EmployeeAvatar = ({ isDeactivated = false, ...rest }: Props) => {
-  const avatar = <Avatar {...rest} />;
+export const EmployeeAvatar = ({
+  isDeactivated = false,
+  alt,
+  ...rest
+}: Props) => {
+  const firstLetter = alt?.[0];
+
+  const avatar = (
+    <Avatar alt={alt} {...rest}>
+      {firstLetter}
+    </Avatar>
+  );
 
   if (!isDeactivated) return avatar;
 
   return (
-    <Stack spacing={0.5}>
+    <Stack spacing={0.5} width={40}>
       <Box>
         <Badge
           overlap="circular"

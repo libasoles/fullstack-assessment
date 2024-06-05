@@ -15,7 +15,6 @@ export function mapEmployee(employee: DTO.Employee): Employee {
     ...employee,
     id: employee.id as number,
     department: employee.department as Department,
-    avatar: "/avatar.jpg", // TODO: use an actual existing image or grab it from server when possible
     daysSinceHire: formattedDuration,
     isActive: employee.isActive as boolean,
     name: () => `${employee.firstName} ${employee.lastName}`,
