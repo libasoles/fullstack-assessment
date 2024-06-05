@@ -25,7 +25,7 @@ services:
     volumes:
         - ./src:/app/src 
     working_dir: /app
-    command: sh -c "./node_modules/.bin/ts-node ./node_modules/typeorm/cli migration:run -d ./src/config/typeorm.ts && npm run start:dev"
+    command: sh -c "ls && pwd && ./scripts/wait-for-it.sh db:${DB_PORT} -- ./scripts/startup.sh"
   pgadmin:
     image: dpage/pgadmin4 
     restart: always 
