@@ -1,6 +1,6 @@
 import { endpointFor } from "@/api/endpoints";
 import { http, HttpResponse } from "msw";
-import { createEmployee } from "./factory";
+import { createEmployee } from "./server.factory";
 
 export const handlers = [
   http.get(endpointFor.employees, () => {
