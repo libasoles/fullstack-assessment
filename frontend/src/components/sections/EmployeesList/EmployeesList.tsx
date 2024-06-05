@@ -2,14 +2,24 @@
 
 import { useFetchEmployees } from "@/api/fetchEmployees";
 import Loading from "@/components/Loading";
+import NoContent from "@/components/NoContent";
 import Stack from "@mui/material/Stack";
 import EmployeeCard from "./EmployeeCard";
 
 const EmployeesList = () => {
   const { data, isLoading, isError } = useFetchEmployees();
 
-  // TODO: handle error better, providing feedback to the user
-  if (isLoading || isError) return <Loading />;
+  if (isLoading) return <Loading />;
+
+  if (isError || !data)
+    return (
+      <NoContent
+        variant="error"
+        message="We couldn't retrieve the list of users. Try loading the page again in a few seconds."
+      />
+    );
+
+  if (data?.length === 0) return <NoContent message="No employees found" />;
 
   return (
     <Stack gap={2}>

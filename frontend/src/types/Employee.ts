@@ -4,4 +4,5 @@ export interface Employee extends Omit<DTO.Employee, "hireDate"> {
   daysSinceHire: string;
   name: () => string;
   hireDate: () => string;
+  isActive: boolean;
 }
