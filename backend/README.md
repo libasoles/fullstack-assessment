@@ -23,6 +23,10 @@ The server will run using docker. But you can also run the tests from outside do
 
 `npm run test`
 
+### Environment variables
+
+Rename the `.env.example` file to `.env`.
+
 ### Database
 
 Project is dockerized, so you need to have Docker installed on your machine. Then run:

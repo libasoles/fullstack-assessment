@@ -36,6 +36,10 @@ And the tests like this:
 
 `npm run test`
 
+### Environment variables
+
+Rename the `.env.example` file to `.env`.
+
 ### Database
 
 Remember you need to have **Docker** installed on your machine. Then run this command **inside backend folder**:

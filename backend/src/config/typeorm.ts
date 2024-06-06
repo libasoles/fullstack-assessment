@@ -6,11 +6,11 @@ import { Employee } from '../employees/Employee.entity';
 
 dotenvConfig({ path: '.env' });
 
-const { DB_NAME, DB_PORT, DB_USER, DB_PASSWORD } = process.env;
+const { DB_HOST, DB_NAME, DB_PORT, DB_USER, DB_PASSWORD } = process.env;
 
 const config = {
   type: 'postgres',
-  host: 'db',
+  host: `${DB_HOST}`,
   port: `${DB_PORT}`,
   username: `${DB_USER}`,
   password: `${DB_PASSWORD}`,
