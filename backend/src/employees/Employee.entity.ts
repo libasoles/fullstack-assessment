@@ -50,7 +50,7 @@ export class Employee {
   @IsNotEmpty()
   @MaxLength(50)
   @Column()
-  address: string; // TODO: grab address from Address entity
+  address: string;
 
   @IsBoolean()
   @Column({ name: 'is_active' })

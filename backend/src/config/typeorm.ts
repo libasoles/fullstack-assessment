@@ -2,7 +2,6 @@ import { registerAs } from '@nestjs/config';
 import { config as dotenvConfig } from 'dotenv';
 import { DataSource, DataSourceOptions } from 'typeorm';
 import { Department } from '../departments/Department.entity';
-import { Address } from '../employees/Address.entity';
 import { Employee } from '../employees/Employee.entity';
 
 dotenvConfig({ path: '.env' });
@@ -16,7 +15,7 @@ const config = {
   username: `${DB_USER}`,
   password: `${DB_PASSWORD}`,
   database: `${DB_NAME}`,
-  entities: [Employee, Address, Department], // TODO: check if autoLoadEntities is enough
+  entities: [Employee, Department], // TODO: check if autoLoadEntities is enough
   migrations: ['dist/migrations/*{.ts,.js}'],
   autoLoadEntities: true,
 };
