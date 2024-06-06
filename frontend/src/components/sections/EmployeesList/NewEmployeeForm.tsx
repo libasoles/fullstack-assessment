@@ -38,10 +38,11 @@ const validationSchema = z.object({
     .string()
     .min(3, "Address is too short")
     .max(255, "Address is too long"),
-  department: z.object({
-    id: z.number(),
-    name: z.string(),
-  }),
+  // TODO: revisit this validation. Not working 100%
+  // department: z.object({
+  //   id: z.number(),
+  //   name: z.string(),
+  // }),
   hireDate: z
     .custom<Dayjs>((val) => val instanceof dayjs, "Invalid date")
     .refine((data) => data < dayjs(Date.now()), {
@@ -97,23 +98,27 @@ const AddNewEmployeeButton = () => {
 
   const isDialogFullWidth = useMediaQuery("(max-width:600px)");
 
-  // TODO: !formik.dirty || !formik.isValid || !validateForm(formik.values);
-  const isSubmitButtonDisabled = false;
+  const isSubmitButtonEnabled =
+    formik.dirty && formik.isValid && validateForm(formik.values);
 
   return (
     <ConfirmDialog
       title="New employee"
-      trigger={({ onClick: handleClick }) => (
+      trigger={() => (
         <Button variant="outlined" size="small" onClick={openDialog}>
           Add Employee
         </Button>
       )}
       onConfirm={handleConfirm}
       fullScreen={isDialogFullWidth}
-      isDisabled={isSubmitButtonDisabled}
+      isDisabled={!isSubmitButtonEnabled}
       isOpen={isOpen}
       handleOpen={openDialog}
-      handleClose={closeDialog}
+      handleClose={() => {
+        console.log("DONE");
+        closeDialog();
+        formik.resetForm();
+      }}
     >
       {isError && <Typography color="error">Something went wrong</Typography>}
 
@@ -128,7 +133,9 @@ const AddNewEmployeeButton = () => {
               onChange={formik.handleChange}
               value={formik.values.firstName}
               onBlur={formik.handleBlur}
-              helperText={formik.touched.firstName && formik.errors.firstName}
+              helperText={
+                formik.touched.firstName ? formik.errors.firstName : " "
+              }
               error={
                 formik.touched.firstName && Boolean(formik.errors.firstName)
               }
@@ -141,7 +148,9 @@ const AddNewEmployeeButton = () => {
               onChange={formik.handleChange}
               value={formik.values.lastName}
               onBlur={formik.handleBlur}
-              helperText={formik.touched.lastName && formik.errors.lastName}
+              helperText={
+                formik.touched.lastName ? formik.errors.lastName : " "
+              }
               error={formik.touched.lastName && Boolean(formik.errors.lastName)}
             />
           </PairOfFields>
@@ -155,7 +164,7 @@ const AddNewEmployeeButton = () => {
               onChange={formik.handleChange}
               value={formik.values.phone}
               onBlur={formik.handleBlur}
-              helperText={formik.touched.phone && formik.errors.phone}
+              helperText={formik.touched.phone ? formik.errors.phone : " "}
               error={formik.touched.phone && Boolean(formik.errors.phone)}
             />
             <TextField
@@ -166,7 +175,7 @@ const AddNewEmployeeButton = () => {
               onChange={formik.handleChange}
               value={formik.values.address}
               onBlur={formik.handleBlur}
-              helperText={formik.touched.address && formik.errors.address}
+              helperText={formik.touched.address ? formik.errors.address : " "}
               error={formik.touched.address && Boolean(formik.errors.address)}
             />
           </PairOfFields>
@@ -179,30 +188,37 @@ const AddNewEmployeeButton = () => {
                 formik.setFieldValue("department", department);
               }}
               onBlur={formik.handleBlur}
-              helperText={formik.touched.department && formik.errors.department}
+              helperText={
+                formik.touched.department ? formik.errors.department : " "
+              }
               error={
                 formik.touched.department && Boolean(formik.errors.department)
               }
             />
 
-            <DatePicker
-              label="Hire date"
-              name="hireDate"
-              value={formik.values.hireDate}
-              disableFuture
-              onChange={(value) => {
-                formik.setFieldValue("hireDate", value);
-                formik.validateField("hireDate");
-              }}
-              slotProps={{
-                textField: {
-                  variant: "standard",
-                  fullWidth: true,
-                  error: formik.touched.hireDate && !!formik.errors.hireDate,
-                  helperText: formik.touched.hireDate && formik.errors.hireDate,
-                },
-              }}
-            />
+            <Box>
+              <DatePicker
+                label="Hire date"
+                name="hireDate"
+                value={formik.values.hireDate}
+                disableFuture
+                onChange={(value) => {
+                  formik.setFieldValue("hireDate", value, true);
+                  formik.validateField("hireDate");
+                }}
+                slotProps={{
+                  textField: {
+                    variant: "standard",
+                    fullWidth: true,
+                    onBlur: formik.handleBlur,
+                    helperText:
+                      formik.values.hireDate && Boolean(formik.errors.hireDate)
+                        ? formik.errors.hireDate?.[0]
+                        : " ",
+                  },
+                }}
+              />
+            </Box>
           </PairOfFields>
         </Box>
       </form>
@@ -212,12 +228,7 @@ const AddNewEmployeeButton = () => {
 
 const PairOfFields = ({ children }: PropsWithChildren) => {
   return (
-    <Stack
-      m={2}
-      direction={{ sm: "row" }}
-      gap={2}
-      justifyContent="space-between"
-    >
+    <Stack direction={{ sm: "row" }} gap={2} justifyContent="space-between">
       {children}
     </Stack>
   );

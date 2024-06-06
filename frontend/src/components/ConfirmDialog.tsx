@@ -7,17 +7,11 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useState } from "react";
 
-type TriggerProps = {
-  onClick: () => void;
-};
-
-type OnConfirmParams = { closeDialog: () => void };
-
 interface Props extends Omit<DialogProps, "open"> {
   title?: string;
   isOpen: boolean;
   isDisabled?: boolean;
-  trigger: (props: TriggerProps) => React.ReactElement;
+  trigger: () => React.ReactElement;
   handleOpen: () => void;
   handleClose: () => void;
   onConfirm: () => void;
@@ -51,7 +45,7 @@ const ConfirmDialog = ({
 }: Props) => {
   return (
     <>
-      {trigger({ onClick: handleOpen })}
+      {trigger()}
       <Dialog
         open={isOpen}
         onClose={handleClose}

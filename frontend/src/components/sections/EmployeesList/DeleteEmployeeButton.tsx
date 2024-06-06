@@ -20,12 +20,12 @@ const DeleteEmployeeButton = ({ employee }: Props) => {
 
   return (
     <ConfirmDialog
-      trigger={({ onClick: handleClick }) => (
+      trigger={() => (
         <Button
           size="small"
           color="error"
           startIcon={<DeleteIcon fontSize="small" />}
-          onClick={handleClick}
+          onClick={openDialog}
         >
           Delete
         </Button>
