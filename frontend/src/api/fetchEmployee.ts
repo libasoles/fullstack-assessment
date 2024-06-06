@@ -5,7 +5,7 @@ import { mapEmployee } from "./mappers";
 import { EMPLOYEE } from "./queryKeys";
 
 async function fetchEmployee(id: Employee["id"]) {
-  const res = await fetch(endpointFor.employee(id));
+  const res = await fetch(`${endpointFor.employees}/${id}`);
 
   return await res.json();
 }

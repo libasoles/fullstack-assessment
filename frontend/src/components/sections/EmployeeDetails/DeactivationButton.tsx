@@ -1,8 +1,9 @@
 import { useUpdateEmployee } from "@/api/updateDepartment";
+import { Employee } from "@/types/Employee";
 import Button from "@mui/material/Button";
 
 type Props = {
-  employee: { id: number };
+  employee: { id: Employee["id"] };
   isActive: boolean;
 };
 

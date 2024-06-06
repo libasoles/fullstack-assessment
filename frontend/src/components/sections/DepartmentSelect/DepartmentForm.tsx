@@ -1,4 +1,5 @@
 "use client";
+
 import { useFetchDepartments } from "@/api/fetchDepartments";
 import { Employee } from "@/types/Employee";
 import { SelectChangeEvent } from "@mui/material";
@@ -29,28 +30,30 @@ const DepartmentForm = ({ employee }: Props) => {
   const hasDeparmentChanged = selected !== initialValue;
 
   return (
-    <Box width="fit-content" minWidth={240}>
-      <FormControl fullWidth variant="standard">
-        <InputLabel id="department-label">Department</InputLabel>
-        <Select
-          labelId="department-label"
-          value={selected}
-          label="Department"
-          onChange={handleDepartmentChange}
-        >
-          {departments.map((department) => (
-            <MenuItem key={department.id} value={department.id}>
-              {department.name}
-            </MenuItem>
-          ))}
-        </Select>
+    <Box width="fit-content" minWidth={240} data-testid="update-deparment-form">
+      <form role="form">
+        <FormControl fullWidth variant="standard">
+          <InputLabel id="department-label">Department</InputLabel>
+          <Select
+            labelId="department-label"
+            value={selected}
+            label="Department"
+            onChange={handleDepartmentChange}
+          >
+            {departments.map((department) => (
+              <MenuItem key={department.id} value={department.id}>
+                {department.name}
+              </MenuItem>
+            ))}
+          </Select>
 
-        <UpdateButton
-          employee={employee}
-          isEnabled={hasDeparmentChanged}
-          departmentId={selected}
-        />
-      </FormControl>
+          <UpdateButton
+            employee={employee}
+            isEnabled={hasDeparmentChanged}
+            departmentId={selected}
+          />
+        </FormControl>
+      </form>
     </Box>
   );
 };

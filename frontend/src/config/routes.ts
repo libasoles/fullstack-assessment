@@ -1,4 +1,6 @@
+import { Employee } from "@/types/Employee";
+
 export const routes = {
   home: "/",
-  employee: (id: number) => `/employee/${id}`,
+  employee: (id: Employee["id"]) => `/employee/${id}`,
 };

@@ -2,16 +2,17 @@
 
 import EmployeeDetails from "@/components/sections/EmployeeDetails/EmployeeDetails";
 import { routes } from "@/config/routes";
+import { Employee } from "@/types/Employee";
 import ChevronLeft from "@mui/icons-material/ChevronLeft";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 
 type Props = {
-  params: { id: number };
+  params: { id: Employee["id"] };
 };
 
-export default function Employee({ params }: Props) {
+export default function EmployeePage({ params }: Props) {
   const { id } = params;
 
   return (

@@ -13,7 +13,7 @@ export function mapEmployee(employee: DTO.Employee): Employee {
 
   return {
     ...employee,
-    id: employee.id as number,
+    id: employee.id as Employee["id"],
     department: employee.department as Department,
     daysSinceHire: formattedDuration,
     isActive: employee.isActive as boolean,

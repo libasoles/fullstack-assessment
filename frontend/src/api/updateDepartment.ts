@@ -3,7 +3,7 @@ import { endpointFor } from "./endpoints";
 import { EMPLOYEE, EMPLOYEES } from "./queryKeys";
 
 async function updateEmployee(data: Partial<DTO.Employee>) {
-  return fetch(endpointFor.employee(data.id as number), {
+  return fetch(`${endpointFor.employees}/${data.id as number}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",

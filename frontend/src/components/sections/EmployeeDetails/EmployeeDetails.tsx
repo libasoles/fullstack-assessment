@@ -7,12 +7,13 @@ import NoContent from "@/components/NoContent";
 import DepartmentForm from "@/components/sections/DepartmentSelect/DepartmentForm";
 import DeactivationButton from "@/components/sections/EmployeeDetails/DeactivationButton";
 import { InfoRow } from "@/components/sections/EmployeeDetails/InfoRow";
+import { Employee } from "@/types/Employee";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
 type Props = {
-  employeeId: number;
+  employeeId: Employee["id"];
 };
 
 const EmployeeDetails = ({ employeeId: id }: Props) => {
@@ -32,7 +33,11 @@ const EmployeeDetails = ({ employeeId: id }: Props) => {
     employee;
 
   return (
-    <Stack direction={{ lg: "row" }} justifyContent="space-between">
+    <Stack
+      direction={{ lg: "row" }}
+      justifyContent="space-between"
+      data-testid="employee-details-section"
+    >
       <Stack direction="row" spacing={4}>
         <EmployeeAvatar alt={firstName} isDeactivated={!isActive} />
         <Stack>

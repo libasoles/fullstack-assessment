@@ -1,11 +1,12 @@
 import { useUpdateEmployee } from "@/api/updateDepartment";
+import { Department } from "@/types/Department";
 import { Employee } from "@/types/Employee";
 import Button from "@mui/material/Button";
 
 type Props = {
   employee: Employee;
   isEnabled: boolean;
-  departmentId: number;
+  departmentId: Department["id"];
 };
 
 const UpdateButton = ({ employee, isEnabled, departmentId }: Props) => {

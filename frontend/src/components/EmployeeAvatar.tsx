@@ -8,6 +8,8 @@ interface Props extends AvatarProps {
   isDeactivated?: boolean;
 }
 
+const testId = "employee-avatar";
+
 // TODO: solve visual glitch on activation change
 export const EmployeeAvatar = ({
   isDeactivated = false,
@@ -22,10 +24,10 @@ export const EmployeeAvatar = ({
     </Avatar>
   );
 
-  if (!isDeactivated) return avatar;
+  if (!isDeactivated) return <Box data-testid={testId}>{avatar}</Box>;
 
   return (
-    <Stack spacing={0.5} width={40}>
+    <Stack spacing={0.5} width={40} data-testid={testId}>
       <Box>
         <Badge
           overlap="circular"

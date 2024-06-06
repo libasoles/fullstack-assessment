@@ -19,7 +19,7 @@ describe("List of employees", () => {
       expect(employees).toHaveLength(3);
       expect(employees[0]).toHaveTextContent("John Doe");
       expect(employees[1]).toHaveTextContent("Jane Smith");
-      expect(employees[2]).toHaveTextContent("Alice Wonders");
+      expect(employees[2]).toHaveTextContent("Alice Liddell");
     });
   });
 
