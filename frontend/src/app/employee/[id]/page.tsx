@@ -8,6 +8,7 @@ import ChevronLeft from "@mui/icons-material/ChevronLeft";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
+import Link from "next/link";
 
 type Props = {
   params: { id: Employee["id"] };
@@ -24,6 +25,7 @@ export default function EmployeePage({ params }: Props) {
           size="small"
           startIcon={<ChevronLeft />}
           href={routes.home}
+          LinkComponent={Link}
         >
           Go Back
         </Button>

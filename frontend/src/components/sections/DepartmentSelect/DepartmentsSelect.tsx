@@ -1,6 +1,6 @@
 "use client";
 
-import { useFetchDepartments } from "@/api/fetchDepartments";
+import { useFetchDepartments } from "@/api/useFetchDepartments";
 import { Department } from "@/types/Department";
 import FormControl from "@mui/material/FormControl";
 import FormHelperText from "@mui/material/FormHelperText";

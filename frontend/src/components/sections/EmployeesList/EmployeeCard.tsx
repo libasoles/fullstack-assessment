@@ -8,6 +8,7 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import Link from "next/link";
 import DeleteEmployeeButton from "./DeleteEmployeeButton";
 
 type EmployeeCardProps = {
@@ -53,6 +54,7 @@ const EmployeeCard = ({ employee }: EmployeeCardProps) => {
                   size="small"
                   variant="outlined"
                   href={routes.employee(id)}
+                  LinkComponent={Link}
                 >
                   View details
                 </Button>

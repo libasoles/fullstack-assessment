@@ -1,4 +1,4 @@
-import { useUpdateEmployee } from "@/api/updateEmployee";
+import { useUpdateEmployee } from "@/api/useUpdateEmployee";
 import { Department } from "@/types/Department";
 import { Employee } from "@/types/Employee";
 import Button from "@mui/material/Button";

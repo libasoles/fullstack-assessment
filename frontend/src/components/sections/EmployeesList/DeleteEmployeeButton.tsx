@@ -1,4 +1,4 @@
-import { useDeleteEmployee } from "@/api/deleteEmployee";
+import { useDeleteEmployee } from "@/api/useDeleteEmployee";
 import ConfirmDialog from "@/components/ConfirmDialog";
 import { Employee } from "@/types/Employee";
 import DeleteIcon from "@mui/icons-material/Delete";

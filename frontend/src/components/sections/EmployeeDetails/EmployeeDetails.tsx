@@ -1,6 +1,6 @@
 "use client";
 
-import { useFetchEmployee } from "@/api/fetchEmployee";
+import { useFetchEmployee } from "@/api/useFetchEmployee";
 import { EmployeeAvatar } from "@/components/EmployeeAvatar";
 import Loading from "@/components/Loading";
 import NoContent from "@/components/NoContent";
