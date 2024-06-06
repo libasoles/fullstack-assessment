@@ -80,7 +80,7 @@ describe("Employee details", () => {
       });
     });
 
-    it.only("should change the department when submitting the form", async () => {
+    it("should change the department when submitting the form", async () => {
       function getUpdateButton() {
         const form = screen.getByTestId("update-deparment-form");
 
