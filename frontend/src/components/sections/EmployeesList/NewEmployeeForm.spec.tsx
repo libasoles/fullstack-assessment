@@ -1,7 +1,7 @@
 import ClientProviders from "@/providers/clientProviders";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import AddNewEmployeeButton from "./AddNewEmployeeForm";
+import AddNewEmployeeButton from "./NewEmployeeForm";
 
 describe("Add new employee", () => {
   beforeEach(() => {
@@ -27,5 +27,7 @@ describe("Add new employee", () => {
       expect(dialog).toHaveTextContent("New employee");
       expect(form).toBeInTheDocument();
     });
+
+    // TODO: test on submit it adds the new employee to the list. And it it fails, displays a dialog (TODO)
   });
 });

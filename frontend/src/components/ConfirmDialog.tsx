@@ -15,10 +15,27 @@ type OnConfirmParams = { closeDialog: () => void };
 
 interface Props extends Omit<DialogProps, "open"> {
   title?: string;
+  isOpen: boolean;
   isDisabled?: boolean;
   trigger: (props: TriggerProps) => React.ReactElement;
-  onConfirm: ({ closeDialog }: OnConfirmParams) => void;
+  handleOpen: () => void;
+  handleClose: () => void;
+  onConfirm: () => void;
 }
+
+export const useConfirmDialog = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openDialog = () => {
+    setIsOpen(true);
+  };
+
+  const closeDialog = () => {
+    setIsOpen(false);
+  };
+
+  return { isOpen, openDialog, closeDialog };
+};
 
 const ConfirmDialog = ({
   title,
@@ -27,18 +44,11 @@ const ConfirmDialog = ({
   children,
   fullScreen,
   isDisabled = false,
+  isOpen,
+  handleOpen,
+  handleClose,
   ...rest
 }: Props) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleOpen = () => {
-    setIsOpen(true);
-  };
-
-  const handleClose = () => {
-    setIsOpen(false);
-  };
-
   return (
     <>
       {trigger({ onClick: handleOpen })}
@@ -68,13 +78,7 @@ const ConfirmDialog = ({
         <DialogContent>{children}</DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button
-            onClick={() => {
-              onConfirm({ closeDialog: handleClose });
-            }}
-            autoFocus
-            disabled={isDisabled}
-          >
+          <Button onClick={onConfirm} autoFocus disabled={isDisabled}>
             OK
           </Button>
         </DialogActions>

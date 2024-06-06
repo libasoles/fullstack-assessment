@@ -1,12 +1,11 @@
 import { Employee } from "@/types/Employee";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
 import { endpointFor } from "./endpoints";
 import { EMPLOYEES } from "./queryKeys";
 
 function deleteEmployee(id: Employee["id"]) {
-  return fetch(`${endpointFor.employees}/${id}`, {
-    method: "DELETE",
-  });
+  return axios.delete(`${endpointFor.employees}/${id}`);
 }
 
 export function useDeleteEmployee() {

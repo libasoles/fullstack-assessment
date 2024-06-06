@@ -1,18 +1,17 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
 import { endpointFor } from "./endpoints";
 import { EMPLOYEES } from "./queryKeys";
 
 async function createEmployee(employee: DTO.Employee) {
-  return await fetch(endpointFor.employees, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(employee),
-  });
+  return await axios.post(endpointFor.employees, JSON.stringify(employee));
 }
 
-export function useCreateEmployee() {
+type useCreateEmployeeProps = {
+  onSuccess: () => void;
+};
+
+export function useCreateEmployee({ onSuccess }: useCreateEmployeeProps) {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -29,12 +28,17 @@ export function useCreateEmployee() {
 
       return { previousEmployees };
     },
-    onError: (err, variables, context) => {
+    onError: (error, variables, context) => {
       // Rollback the cache update on error
       queryClient.setQueryData([EMPLOYEES], context?.previousEmployees);
     },
-    onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: [EMPLOYEES] });
+    onSettled: (response, error, variables, context) => {
+      if (!response?.ok) {
+        queryClient.setQueryData([EMPLOYEES], context?.previousEmployees);
+      } else {
+        // We keep the optimistic update, so we don't disturb the order of appeareance
+        onSuccess();
+      }
     },
   });
 }

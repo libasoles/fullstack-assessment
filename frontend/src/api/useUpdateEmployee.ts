@@ -1,15 +1,13 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
 import { endpointFor } from "./endpoints";
 import { DEPARTMENT_HISTORY, EMPLOYEE, EMPLOYEES } from "./queryKeys";
 
 async function updateEmployee(data: Partial<DTO.Employee>) {
-  return fetch(`${endpointFor.employees}/${data.id as number}`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
+  return axios.patch(
+    `${endpointFor.employees}/${data.id as number}`,
+    JSON.stringify(data)
+  );
 }
 
 export function useUpdateEmployee() {

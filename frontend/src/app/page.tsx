@@ -1,5 +1,5 @@
-import AddNewEmployeeButton from "@/components/sections/EmployeesList/AddNewEmployeeForm";
 import EmployeesList from "@/components/sections/EmployeesList/EmployeesList";
+import AddNewEmployeeButton from "@/components/sections/EmployeesList/NewEmployeeForm";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 

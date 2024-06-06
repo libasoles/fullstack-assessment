@@ -1,7 +1,8 @@
 "use client";
 
 import { useCreateEmployee } from "@/api/useCreateEmployee";
-import ConfirmDialog from "@/components/ConfirmDialog";
+import ConfirmDialog, { useConfirmDialog } from "@/components/ConfirmDialog";
+import { Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
@@ -54,7 +55,14 @@ type FormValues = Omit<DTO.Employee, "hireDate" | "department"> & {
 };
 
 const AddNewEmployeeButton = () => {
-  const { mutate, data, isError } = useCreateEmployee();
+  const { isOpen, openDialog, closeDialog } = useConfirmDialog();
+
+  const { mutate, isError, error } = useCreateEmployee({
+    onSuccess: () => {
+      closeDialog();
+      formik.resetForm();
+    },
+  });
 
   const validateForm = (values: FormValues) => {
     try {
@@ -89,21 +97,26 @@ const AddNewEmployeeButton = () => {
 
   const isDialogFullWidth = useMediaQuery("(max-width:600px)");
 
+  // TODO: !formik.dirty || !formik.isValid || !validateForm(formik.values);
   const isSubmitButtonDisabled = false;
-  // !formik.dirty || !formik.isValid || !validateForm(formik.values);
 
   return (
     <ConfirmDialog
       title="New employee"
       trigger={({ onClick: handleClick }) => (
-        <Button variant="outlined" size="small" onClick={handleClick}>
+        <Button variant="outlined" size="small" onClick={openDialog}>
           Add Employee
         </Button>
       )}
       onConfirm={handleConfirm}
       fullScreen={isDialogFullWidth}
       isDisabled={isSubmitButtonDisabled}
+      isOpen={isOpen}
+      handleOpen={openDialog}
+      handleClose={closeDialog}
     >
+      {isError && <Typography color="error">Something went wrong</Typography>}
+
       <form role="form">
         <Box sx={{ minWidth: { sm: 500 } }}>
           <PairOfFields>

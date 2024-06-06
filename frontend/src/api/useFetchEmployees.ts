@@ -1,13 +1,14 @@
 import { Employee } from "@/types/Employee";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
+import axios from "axios";
 import { endpointFor } from "./endpoints";
 import { mapEmployees } from "./mappers";
 import { EMPLOYEES } from "./queryKeys";
 
 async function fetchEmployees() {
-  const res = await fetch(endpointFor.employees);
+  const response = await axios.get(endpointFor.employees);
 
-  return await res.json();
+  return response.data;
 }
 
 export function useFetchEmployees(): UseQueryResult<Employee[]> {

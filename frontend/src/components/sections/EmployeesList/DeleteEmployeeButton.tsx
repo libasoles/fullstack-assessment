@@ -1,5 +1,5 @@
 import { useDeleteEmployee } from "@/api/useDeleteEmployee";
-import ConfirmDialog from "@/components/ConfirmDialog";
+import ConfirmDialog, { useConfirmDialog } from "@/components/ConfirmDialog";
 import { Employee } from "@/types/Employee";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Button from "@mui/material/Button";
@@ -10,6 +10,8 @@ type Props = {
 };
 
 const DeleteEmployeeButton = ({ employee }: Props) => {
+  const { isOpen, openDialog, closeDialog } = useConfirmDialog();
+
   const { mutate } = useDeleteEmployee();
 
   const handleConfirm = () => {
@@ -28,6 +30,9 @@ const DeleteEmployeeButton = ({ employee }: Props) => {
           Delete
         </Button>
       )}
+      isOpen={isOpen}
+      handleOpen={openDialog}
+      handleClose={closeDialog}
       onConfirm={handleConfirm}
     >
       <DialogContentText id="dialog-description">
