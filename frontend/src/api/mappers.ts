@@ -1,5 +1,5 @@
 import config from "@/config/config";
-import { Department } from "@/types/Department";
+import { Department, DepartmentHistory } from "@/types/Department";
 import { Employee } from "@/types/Employee";
 import { daysSince } from "@/utils/date";
 import dayjs from "dayjs";
@@ -20,5 +20,18 @@ export function mapEmployee(employee: DTO.Employee): Employee {
     name: () => `${employee.firstName} ${employee.lastName}`,
     hireDate: (format = config.dates.format) =>
       dayjs(employee.hireDate).format(format),
+  };
+}
+
+export function mapDepartmentHistory(
+  record: DTO.DepartmentHistory[]
+): DepartmentHistory[] {
+  return record.map(mapHistoryRecord);
+}
+
+function mapHistoryRecord(record: DTO.DepartmentHistory): DepartmentHistory {
+  return {
+    department: record.department as Department,
+    date: dayjs(record.date).format("MM/DD/YYYY"),
   };
 }

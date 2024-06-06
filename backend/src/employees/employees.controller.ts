@@ -10,7 +10,7 @@ import {
 } from '@nestjs/common';
 import {
   DepartmentsHistoryService,
-  SaveDepartmentChange,
+  LogEmployeeDepartment,
 } from './departmentsHistory.service';
 import { Employee } from './Employee.entity';
 import { EmployeesService } from './employees.service';
@@ -23,6 +23,7 @@ export class EmployeesController {
   ) {}
 
   @Post()
+  @UseInterceptors(LogEmployeeDepartment)
   async createEmployee(@Body() employee: Employee) {
     return await this.employeesService.create(employee);
   }
@@ -38,7 +39,7 @@ export class EmployeesController {
   }
 
   @Patch(':id')
-  @UseInterceptors(SaveDepartmentChange)
+  @UseInterceptors(LogEmployeeDepartment)
   async updateEmployee(
     @Param('id') id: number,
     @Body() employee: Partial<Employee>,

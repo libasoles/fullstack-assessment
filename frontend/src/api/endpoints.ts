@@ -5,4 +5,5 @@ const baseUrl = config.api.baseUrl;
 export const endpointFor = {
   employees: `${baseUrl}/employees`,
   departments: `${baseUrl}/departments`,
+  departmenHistory: (id: number) => `${baseUrl}/employees/${id}/departments`,
 };

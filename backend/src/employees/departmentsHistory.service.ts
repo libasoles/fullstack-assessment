@@ -31,7 +31,7 @@ export class DepartmentsHistoryService {
   }
 
   async getDepartmentsHistory(employeeId: Employee['id']) {
-    this.repository.find({
+    return this.repository.find({
       where: { employeeId },
       relations: ['department'],
     });
@@ -39,7 +39,7 @@ export class DepartmentsHistoryService {
 }
 
 @Injectable()
-export class SaveDepartmentChange implements NestInterceptor {
+export class LogEmployeeDepartment implements NestInterceptor {
   constructor(
     private readonly departmentsHistoryService: DepartmentsHistoryService,
   ) {}

@@ -1,5 +1,6 @@
 "use client";
 
+import DepartmentHistory from "@/components/sections/EmployeeDetails/DepartmentHistory";
 import EmployeeDetails from "@/components/sections/EmployeeDetails/EmployeeDetails";
 import { routes } from "@/config/routes";
 import { Employee } from "@/types/Employee";
@@ -28,7 +29,11 @@ export default function EmployeePage({ params }: Props) {
         </Button>
       </Box>
 
-      <EmployeeDetails employeeId={id} />
+      <Stack spacing={16}>
+        <EmployeeDetails employeeId={id} />
+
+        <DepartmentHistory employeeId={id} />
+      </Stack>
     </Stack>
   );
 }

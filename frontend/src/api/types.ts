@@ -14,4 +14,9 @@ namespace DTO {
     address: string;
     isActive?: boolean;
   }
+
+  export type DepartmentHistory = {
+    date: string;
+    department: Department;
+  };
 }

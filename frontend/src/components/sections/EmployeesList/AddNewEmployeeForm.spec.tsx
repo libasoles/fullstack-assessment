@@ -1,7 +1,7 @@
 import ClientProviders from "@/providers/clientProviders";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import AddNewEmployeeButton from "./AddNewEmployeeButton";
+import AddNewEmployeeButton from "./AddNewEmployeeForm";
 
 describe("Add new employee", () => {
   beforeEach(() => {

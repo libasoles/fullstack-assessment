@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { endpointFor } from "./endpoints";
-import { EMPLOYEE, EMPLOYEES } from "./queryKeys";
+import { DEPARTMENT_HISTORY, EMPLOYEE, EMPLOYEES } from "./queryKeys";
 
 async function updateEmployee(data: Partial<DTO.Employee>) {
   return fetch(`${endpointFor.employees}/${data.id as number}`, {
@@ -20,6 +20,7 @@ export function useUpdateEmployee() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [EMPLOYEE] });
       queryClient.invalidateQueries({ queryKey: [EMPLOYEES] });
+      queryClient.invalidateQueries({ queryKey: [DEPARTMENT_HISTORY] });
     },
   });
 }

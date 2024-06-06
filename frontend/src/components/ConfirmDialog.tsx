@@ -11,11 +11,13 @@ type TriggerProps = {
   onClick: () => void;
 };
 
+type OnConfirmParams = { closeDialog: () => void };
+
 interface Props extends Omit<DialogProps, "open"> {
   title?: string;
   isDisabled?: boolean;
   trigger: (props: TriggerProps) => React.ReactElement;
-  onConfirm: () => void;
+  onConfirm: ({ closeDialog }: OnConfirmParams) => void;
 }
 
 const ConfirmDialog = ({
@@ -68,8 +70,7 @@ const ConfirmDialog = ({
           <Button onClick={handleClose}>Cancel</Button>
           <Button
             onClick={() => {
-              handleClose();
-              onConfirm();
+              onConfirm({ closeDialog: handleClose });
             }}
             autoFocus
             disabled={isDisabled}
