@@ -6,13 +6,21 @@ import {
   Param,
   Patch,
   Post,
+  UseInterceptors,
 } from '@nestjs/common';
+import {
+  DepartmentsHistoryService,
+  SaveDepartmentChange,
+} from './departmentsHistory.service';
 import { Employee } from './Employee.entity';
 import { EmployeesService } from './employees.service';
 
 @Controller('employees')
 export class EmployeesController {
-  constructor(private readonly employeesService: EmployeesService) {}
+  constructor(
+    private readonly employeesService: EmployeesService,
+    private readonly departmentsHistoryService: DepartmentsHistoryService,
+  ) {}
 
   @Post()
   async createEmployee(@Body() employee: Employee) {
@@ -30,6 +38,7 @@ export class EmployeesController {
   }
 
   @Patch(':id')
+  @UseInterceptors(SaveDepartmentChange)
   async updateEmployee(
     @Param('id') id: number,
     @Body() employee: Partial<Employee>,
@@ -40,5 +49,10 @@ export class EmployeesController {
   @Delete(':id')
   async deleteEmployee(@Param('id') id: number) {
     return await this.employeesService.delete(id);
+  }
+
+  @Get(':id/departments')
+  async getDepartmentsHistory(@Param('id') id: number) {
+    return await this.departmentsHistoryService.getDepartmentsHistory(id);
   }
 }
