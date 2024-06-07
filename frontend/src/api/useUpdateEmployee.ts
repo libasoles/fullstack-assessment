@@ -4,10 +4,7 @@ import { endpointFor } from "./endpoints";
 import { DEPARTMENT_HISTORY, EMPLOYEE, EMPLOYEES } from "./queryKeys";
 
 async function updateEmployee(data: Partial<DTO.Employee>) {
-  return axios.patch(
-    `${endpointFor.employees}/${data.id as number}`,
-    JSON.stringify(data)
-  );
+  return axios.patch(`${endpointFor.employees}/${data.id as number}`, data);
 }
 
 export function useUpdateEmployee() {

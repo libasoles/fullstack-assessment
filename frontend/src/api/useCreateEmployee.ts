@@ -4,7 +4,7 @@ import { endpointFor } from "./endpoints";
 import { EMPLOYEES } from "./queryKeys";
 
 async function createEmployee(employee: DTO.Employee) {
-  return await axios.post(endpointFor.employees, JSON.stringify(employee));
+  return await axios.post(endpointFor.employees, employee);
 }
 
 type useCreateEmployeeProps = {
