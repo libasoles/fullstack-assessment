@@ -34,6 +34,9 @@ export class DepartmentHistoryService {
     return this.repository.find({
       where: { employeeId },
       relations: ['department'],
+      order: {
+        date: 'DESC',
+      },
     });
   }
 }
