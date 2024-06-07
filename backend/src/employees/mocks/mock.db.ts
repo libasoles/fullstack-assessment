@@ -1,6 +1,6 @@
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { DepartmentHistory } from '../entities/DepartmentHistory.entity';
-import { Employee } from '../entities/Employee.entity';
+import { DepartmentHistory } from '../entities/departmentHistory.entity';
+import { Employee } from '../entities/employee.entity';
 import {
   anEmployee,
   anotherEmployee,

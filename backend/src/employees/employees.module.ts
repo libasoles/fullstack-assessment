@@ -3,8 +3,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { DepartmentHistoryService } from './departmentHistory.service';
 import { EmployeesController } from './employees.controller';
 import { EmployeesService } from './employees.service';
-import { DepartmentHistory } from './entities/DepartmentHistory.entity';
-import { Employee } from './entities/Employee.entity';
+import { DepartmentHistory } from './entities/departmentHistory.entity';
+import { Employee } from './entities/employee.entity';
 
 @Module({
   imports: [

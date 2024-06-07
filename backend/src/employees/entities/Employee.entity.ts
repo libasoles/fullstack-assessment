@@ -1,4 +1,5 @@
 import { IsBoolean, IsNotEmpty, MaxLength } from 'class-validator';
+import { Department } from 'src/departments/department.entity';
 import {
   Column,
   Entity,
@@ -6,7 +7,6 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Department } from '../../departments/Department.entity';
 
 type ConstructorParams = {
   id?: number;

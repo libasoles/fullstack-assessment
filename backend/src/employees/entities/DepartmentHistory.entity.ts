@@ -1,5 +1,5 @@
 import { IsNotEmpty } from 'class-validator';
-import { Department } from 'src/departments/Department.entity';
+import { Department } from 'src/departments/department.entity';
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
 
 type ConstructorParams = {

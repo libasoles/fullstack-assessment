@@ -13,7 +13,7 @@ import {
   LogEmployeeDepartment,
 } from './departmentHistory.service';
 import { EmployeesService } from './employees.service';
-import { Employee } from './entities/Employee.entity';
+import { Employee } from './entities/employee.entity';
 
 @Controller('employees')
 export class EmployeesController {

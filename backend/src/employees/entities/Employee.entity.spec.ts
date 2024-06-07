@@ -1,6 +1,6 @@
 import { plainToClass } from 'class-transformer';
 import { validateSync } from 'class-validator';
-import { Employee } from './Employee.entity';
+import { Employee } from './employee.entity';
 
 describe('CreateUserDto', () => {
   it('should have errors when there are missing fields', () => {

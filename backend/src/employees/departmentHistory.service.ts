@@ -7,8 +7,8 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { Observable, map } from 'rxjs';
 import { Repository } from 'typeorm';
-import { DepartmentHistory } from './entities/DepartmentHistory.entity';
-import { Employee } from './entities/Employee.entity';
+import { DepartmentHistory } from './entities/departmentHistory.entity';
+import { Employee } from './entities/employee.entity';
 
 @Injectable()
 export class DepartmentHistoryService {

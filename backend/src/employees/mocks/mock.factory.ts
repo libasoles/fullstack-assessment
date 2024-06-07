@@ -1,7 +1,7 @@
-import { Department } from '../../departments/Department.entity';
-import { createDepartment } from '../../departments/mocks/mock.factory';
-import { DepartmentHistory } from '../entities/DepartmentHistory.entity';
-import { Employee } from '../entities/Employee.entity';
+import { Department } from 'src/departments/department.entity';
+import { createDepartment } from 'src/departments/mocks/mock.factory';
+import { DepartmentHistory } from '../entities/departmentHistory.entity';
+import { Employee } from '../entities/employee.entity';
 
 export function createEmployee(data?: Partial<Employee>) {
   return new Employee({

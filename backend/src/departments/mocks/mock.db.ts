@@ -1,5 +1,5 @@
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { Department } from '../Department.entity';
+import { Department } from '../department.entity';
 import { departments } from './mock.factory';
 
 export default {
