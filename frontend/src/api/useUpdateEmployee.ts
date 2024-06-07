@@ -35,9 +35,11 @@ export function useUpdateEmployee() {
         context?.employee
       );
     },
-    onSuccess: () => {
+    onSuccess: (response, variables, context) => {
       queryClient.invalidateQueries({ queryKey: [EMPLOYEES] });
-      queryClient.invalidateQueries({ queryKey: [DEPARTMENT_HISTORY] });
+      queryClient.invalidateQueries({
+        queryKey: [DEPARTMENT_HISTORY, String(context?.employee.id)],
+      });
     },
   });
 }

@@ -17,7 +17,7 @@ export function useFetchDepartmentHistory({
   employeeId,
 }: useFetchEmployeeProps): UseQueryResult<DTO.DepartmentHistory[]> {
   return useQuery({
-    queryKey: [DEPARTMENT_HISTORY],
+    queryKey: [DEPARTMENT_HISTORY, String(employeeId)],
     queryFn: () => fetchDepartmentHistory(employeeId),
     select: mapDepartmentHistory,
   });
