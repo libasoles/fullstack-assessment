@@ -7,14 +7,14 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { Observable, map } from 'rxjs';
 import { Repository } from 'typeorm';
+import { DepartmentHistory } from './DepartmentHistory.entity';
 import { Employee } from './Employee.entity';
-import { EmployeeDepartment } from './EmployeeDepartment.entity';
 
 @Injectable()
-export class DepartmentsHistoryService {
+export class DepartmentHistoryService {
   constructor(
-    @InjectRepository(EmployeeDepartment)
-    private repository: Repository<EmployeeDepartment>,
+    @InjectRepository(DepartmentHistory)
+    private repository: Repository<DepartmentHistory>,
   ) {}
 
   async saveDepartmentChange(employee: Employee) {
@@ -22,7 +22,7 @@ export class DepartmentsHistoryService {
     const departmentId = employee.department.id;
 
     this.repository.save(
-      new EmployeeDepartment({
+      new DepartmentHistory({
         employeeId,
         departmentId,
         date: new Date(),
@@ -30,7 +30,7 @@ export class DepartmentsHistoryService {
     );
   }
 
-  async getDepartmentsHistory(employeeId: Employee['id']) {
+  async getDepartmentHistory(employeeId: Employee['id']) {
     return this.repository.find({
       where: { employeeId },
       relations: ['department'],
@@ -41,13 +41,13 @@ export class DepartmentsHistoryService {
 @Injectable()
 export class LogEmployeeDepartment implements NestInterceptor {
   constructor(
-    private readonly departmentsHistoryService: DepartmentsHistoryService,
+    private readonly departmentHistoryService: DepartmentHistoryService,
   ) {}
 
   intercept(context: ExecutionContext, handler: CallHandler): Observable<any> {
     return handler.handle().pipe(
       map(async (employee) => {
-        this.departmentsHistoryService.saveDepartmentChange(employee);
+        this.departmentHistoryService.saveDepartmentChange(employee);
       }),
     );
   }

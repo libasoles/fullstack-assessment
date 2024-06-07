@@ -1,10 +1,16 @@
 import { getRepositoryToken } from '@nestjs/typeorm';
+import { DepartmentHistory } from './DepartmentHistory.entity';
 import { Employee } from './Employee.entity';
-import { anEmployee, anotherEmployee, anUpdatedEmployee } from './mock.factory';
+import {
+  anEmployee,
+  anotherEmployee,
+  anUpdatedEmployee,
+  createDeparmentHistoryRecord,
+} from './mock.factory';
 
 export const nonExistentEmployeeId = 999;
 
-export default {
+const employeesRepositoryMock = {
   provide: getRepositoryToken(Employee),
   useValue: {
     save: jest.fn().mockImplementation((employee) => {
@@ -19,8 +25,38 @@ export default {
 
       return anEmployee;
     }),
-    delete: jest.fn().mockResolvedValue({
-      affected: 1,
+    delete: jest.fn().mockImplementation((employeeId) => {
+      if (employeeId === nonExistentEmployeeId)
+        return {
+          affected: 0,
+        };
+
+      return {
+        affected: 1,
+      };
     }),
   },
 };
+
+const aDepartmentChangeRecord = createDeparmentHistoryRecord();
+const anotherDepartmentChangeRecord = createDeparmentHistoryRecord({
+  employeeId: 1,
+  departmentId: 3,
+});
+
+const departmentHistoryRepositoryMock = {
+  provide: getRepositoryToken(DepartmentHistory),
+  useValue: {
+    find: jest
+      .fn()
+      .mockResolvedValue([
+        aDepartmentChangeRecord,
+        anotherDepartmentChangeRecord,
+      ]),
+  },
+};
+
+export const repositoryMocks = [
+  employeesRepositoryMock,
+  departmentHistoryRepositoryMock,
+];

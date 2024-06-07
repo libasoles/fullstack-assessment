@@ -9,9 +9,9 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import {
-  DepartmentsHistoryService,
+  DepartmentHistoryService,
   LogEmployeeDepartment,
-} from './departmentsHistory.service';
+} from './departmentHistory.service';
 import { Employee } from './Employee.entity';
 import { EmployeesService } from './employees.service';
 
@@ -19,7 +19,7 @@ import { EmployeesService } from './employees.service';
 export class EmployeesController {
   constructor(
     private readonly employeesService: EmployeesService,
-    private readonly departmentsHistoryService: DepartmentsHistoryService,
+    private readonly departmentsHistoryService: DepartmentHistoryService,
   ) {}
 
   @Post()
@@ -54,6 +54,6 @@ export class EmployeesController {
 
   @Get(':id/departments')
   async getDepartmentsHistory(@Param('id') id: number) {
-    return await this.departmentsHistoryService.getDepartmentsHistory(id);
+    return await this.departmentsHistoryService.getDepartmentHistory(id);
   }
 }

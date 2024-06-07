@@ -1,5 +1,6 @@
 import { Department } from '../departments/Department.entity';
 import { createDepartment } from '../departments/mock.factory';
+import { DepartmentHistory } from './DepartmentHistory.entity';
 import { Employee } from './Employee.entity';
 
 export function createEmployee(data?: Partial<Employee>) {
@@ -10,6 +11,18 @@ export function createEmployee(data?: Partial<Employee>) {
     department: new Department({ name: 'Engineering' }),
     phone: '1234567890',
     address: 'Manila, 445',
+    isActive: true,
+    ...data,
+  });
+}
+
+export function createDeparmentHistoryRecord(
+  data?: Partial<DepartmentHistory>,
+) {
+  return new DepartmentHistory({
+    employeeId: 1,
+    departmentId: 1,
+    date: new Date(),
     ...data,
   });
 }
@@ -28,3 +41,9 @@ export const anUpdatedEmployee = createEmployee({
   phone: '(+54) 123456789',
   address: 'Manilla, 435',
 });
+
+const aNewEmployeeWithoutMandatoryData = createEmployee();
+delete aNewEmployeeWithoutMandatoryData.firstName;
+delete aNewEmployeeWithoutMandatoryData.department;
+
+export { aNewEmployeeWithoutMandatoryData };

@@ -9,7 +9,7 @@ type ConstructorParams = {
 };
 
 @Entity({ name: 'department_changes' })
-export class EmployeeDepartment {
+export class DepartmentHistory {
   @PrimaryColumn({ name: 'employee_id' })
   employeeId: number;
 

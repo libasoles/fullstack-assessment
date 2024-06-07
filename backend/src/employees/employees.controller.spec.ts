@@ -1,8 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
+import { DepartmentHistoryService } from './departmentHistory.service';
 import { EmployeesController } from './employees.controller';
 import { EmployeesService } from './employees.service';
-import dbMocks, { nonExistentEmployeeId } from './mock.db';
+import { nonExistentEmployeeId, repositoryMocks } from './mock.db';
 import {
   anEmployee,
   anEmployeeWithoutId,
@@ -16,7 +17,11 @@ describe('EmployeesController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [EmployeesController],
-      providers: [EmployeesService, dbMocks],
+      providers: [
+        EmployeesService,
+        DepartmentHistoryService,
+        ...repositoryMocks,
+      ],
     }).compile();
 
     controller = module.get<EmployeesController>(EmployeesController);
@@ -62,6 +67,12 @@ describe('EmployeesController', () => {
       await expect(
         controller.updateEmployee(nonExistentEmployeeId, anUpdatedEmployee),
       ).rejects.toThrow('Employee not found');
+    });
+
+    it('should return 0 affected rows if employee doesnt exists', async () => {
+      const response = await controller.deleteEmployee(nonExistentEmployeeId);
+
+      expect(response).toEqual({ affected: 0 });
     });
   });
 });
