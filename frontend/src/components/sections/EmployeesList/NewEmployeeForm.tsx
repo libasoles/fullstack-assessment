@@ -96,8 +96,7 @@ const AddNewEmployeeButton = () => {
 
   const isDialogFullWidth = useMediaQuery("(max-width:600px)");
 
-  const isSubmitButtonEnabled =
-    formik.dirty && formik.isValid && validateForm(formik.values);
+  const isSubmitButtonEnabled = formik.dirty && formik.isValid;
 
   return (
     <ConfirmDialog
