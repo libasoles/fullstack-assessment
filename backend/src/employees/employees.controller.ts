@@ -12,8 +12,8 @@ import {
   DepartmentHistoryService,
   LogEmployeeDepartment,
 } from './departmentHistory.service';
-import { Employee } from './Employee.entity';
 import { EmployeesService } from './employees.service';
+import { Employee } from './entities/Employee.entity';
 
 @Controller('employees')
 export class EmployeesController {

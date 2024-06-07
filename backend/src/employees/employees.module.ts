@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { DepartmentHistory } from './DepartmentHistory.entity';
 import { DepartmentHistoryService } from './departmentHistory.service';
-import { Employee } from './Employee.entity';
 import { EmployeesController } from './employees.controller';
 import { EmployeesService } from './employees.service';
+import { DepartmentHistory } from './entities/DepartmentHistory.entity';
+import { Employee } from './entities/Employee.entity';
 
 @Module({
   imports: [

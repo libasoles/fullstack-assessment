@@ -3,13 +3,13 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { DepartmentHistoryService } from './departmentHistory.service';
 import { EmployeesController } from './employees.controller';
 import { EmployeesService } from './employees.service';
-import { nonExistentEmployeeId, repositoryMocks } from './mock.db';
+import { nonExistentEmployeeId, repositoryMocks } from './mocks/mock.db';
 import {
   anEmployee,
   anEmployeeWithoutId,
   anotherEmployee,
   anUpdatedEmployee,
-} from './mock.factory';
+} from './mocks/mock.factory';
 
 describe('EmployeesController', () => {
   let controller: EmployeesController;

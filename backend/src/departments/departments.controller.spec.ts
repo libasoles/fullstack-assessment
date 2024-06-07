@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { DepartmentsController } from './departments.controller';
 import { DepartmentsService } from './departments.service';
-import dbMocks from './mock.db';
-import { departments } from './mock.factory';
+import dbMocks from './mocks/mock.db';
+import { departments } from './mocks/mock.factory';
 
 describe('DepartmentsController', () => {
   let controller: DepartmentsController;

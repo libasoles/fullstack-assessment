@@ -1,4 +1,4 @@
-import { Department } from './Department.entity';
+import { Department } from '../Department.entity';
 
 export function createDepartment(data?: Partial<Department>) {
   return new Department({

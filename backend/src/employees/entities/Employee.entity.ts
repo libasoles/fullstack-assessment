@@ -6,7 +6,7 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Department } from '../departments/Department.entity';
+import { Department } from '../../departments/Department.entity';
 
 type ConstructorParams = {
   id?: number;
