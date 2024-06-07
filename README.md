@@ -50,7 +50,7 @@ cd frontend
 npm install
 ```
 
-Then you can run the application like this:
+Then you can run the `frontend` application like this (keep reading for `backend` instructions):
 
 `npm run dev`
 
@@ -60,19 +60,21 @@ And the tests like this:
 
 ### Environment variables
 
+In the backend folder: `cd backend`
+
 Rename the `.env.example` file to `.env`.
+
+`mv .env_example .env`
 
 ### Database
 
 Remember you need to have **Docker** installed on your machine. Then run this command **inside backend folder**:
 
-`cd backend`
-
 `docker-compose up --build`
 
 That will create a database and then run the migrations. It will also launch the backend server.
 
-Backend API runs on port 3001.
+Backend API runs on port `3001`.
 
 You can run the tests like this:
 
@@ -80,11 +82,12 @@ You can run the tests like this:
 
 ### Try it out
 
-Head to `http://localhost:3000` to see the application running.
-Head to `http://localhost:3001/api` to see the API running (handshake message).
+Head to [http://localhost:3000](http://localhost:3000) to see the application running.
+
+Head to [http://localhost:3001/api](http://localhost:3001/api) to see the API running (handshake message).
 
 ## Database ER Diagram
 
-A note about `Address`. I first started modeling it as a separate table, which I found reasonable given that dates are composed by many parts. But finally I rolled it back to a `varchar`, since a new table would lead to a rabbit hole (another table for cities, another table for states, another for the country). There's nothing in the mockups or requirements mentioning the desired address format. So I decided to focus on the explicit tasks.
+A note about `Address`. I first started modeling it as a separate table, which I found reasonable given that addresses are composed by many parts. But finally I rolled it back to a `varchar`, since a new table would lead to a rabbit hole (extra tables for cities, states, countries). There's nothing in the mockups or requirements mentioning the desired address format or completeness. So I decided to focus on the explicit tasks and leave this as text field.
 
 ![ER Diagram](ERDiagram.png)
