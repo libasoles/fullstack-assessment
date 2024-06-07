@@ -16,7 +16,7 @@ export class CreateHistoryTable1717591166410 implements MigrationInterface {
         columns: [
           { name: 'employee_id', type: 'int' },
           { name: 'department_id', type: 'int' },
-          { name: 'date', type: 'date', default: 'now()' },
+          { name: 'date', type: 'timestamp', default: 'now()' },
         ],
       }),
     );
