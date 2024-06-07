@@ -1,7 +1,9 @@
 "use client";
 
 import { useCreateEmployee } from "@/api/useCreateEmployee";
-import ConfirmDialog, { useConfirmDialog } from "@/components/ConfirmDialog";
+import ConfirmDialog, {
+  useConfirmDialog,
+} from "@/components/generic/ConfirmDialog";
 import { Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";

@@ -1,9 +1,9 @@
 "use client";
 
 import { useFetchEmployee } from "@/api/useFetchEmployee";
-import { EmployeeAvatar } from "@/components/EmployeeAvatar";
-import Loading from "@/components/Loading";
-import NoContent from "@/components/NoContent";
+import { EmployeeAvatar } from "@/components/generic/EmployeeAvatar";
+import Loading from "@/components/generic/Loading";
+import NoContent from "@/components/generic/NoContent";
 import DepartmentForm from "@/components/sections/DepartmentSelect/DepartmentForm";
 import DeactivationButton from "@/components/sections/EmployeeDetails/DeactivationButton";
 import { InfoRow } from "@/components/sections/EmployeeDetails/InfoRow";

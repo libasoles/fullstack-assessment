@@ -1,5 +1,7 @@
 import { useDeleteEmployee } from "@/api/useDeleteEmployee";
-import ConfirmDialog, { useConfirmDialog } from "@/components/ConfirmDialog";
+import ConfirmDialog, {
+  useConfirmDialog,
+} from "@/components/generic/ConfirmDialog";
 import { Employee } from "@/types/Employee";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Button from "@mui/material/Button";

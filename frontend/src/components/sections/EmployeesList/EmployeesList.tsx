@@ -1,8 +1,8 @@
 "use client";
 
 import { useFetchEmployees } from "@/api/useFetchEmployees";
-import Loading from "@/components/Loading";
-import NoContent from "@/components/NoContent";
+import Loading from "@/components/generic/Loading";
+import NoContent from "@/components/generic/NoContent";
 import Stack from "@mui/material/Stack";
 import EmployeeCard from "./EmployeeCard";
 

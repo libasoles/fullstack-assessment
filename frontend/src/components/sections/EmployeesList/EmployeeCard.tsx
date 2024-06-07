@@ -1,4 +1,4 @@
-import { EmployeeAvatar } from "@/components/EmployeeAvatar";
+import { EmployeeAvatar } from "@/components/generic/EmployeeAvatar";
 import { routes } from "@/config/routes";
 import { Employee } from "@/types/Employee";
 import Box from "@mui/material/Box";
