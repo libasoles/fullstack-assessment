@@ -63,6 +63,12 @@ describe('EmployeesController', () => {
   });
 
   describe('Error cases', () => {
+    it('should throw an exception when fetching a non-existing employee', async () => {
+      await expect(
+        controller.getEmployee(nonExistentEmployeeId),
+      ).rejects.toThrow('Employee not found');
+    });
+
     it('should throw an exception when updating a non-existing employee', async () => {
       await expect(
         controller.updateEmployee(nonExistentEmployeeId, anUpdatedEmployee),

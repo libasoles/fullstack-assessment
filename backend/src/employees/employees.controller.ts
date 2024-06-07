@@ -3,6 +3,8 @@ import {
   Controller,
   Delete,
   Get,
+  HttpException,
+  HttpStatus,
   Param,
   Patch,
   Post,
@@ -35,7 +37,13 @@ export class EmployeesController {
 
   @Get(':id')
   async getEmployee(@Param('id') id: number) {
-    return await this.employeesService.getOne(id);
+    const employee = await this.employeesService.getOne(id);
+
+    if (!employee) {
+      throw new HttpException('Employee not found', HttpStatus.NOT_FOUND);
+    }
+
+    return employee;
   }
 
   @Patch(':id')
