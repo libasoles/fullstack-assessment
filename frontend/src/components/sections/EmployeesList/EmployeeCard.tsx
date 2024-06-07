@@ -55,6 +55,7 @@ const EmployeeCard = ({ employee }: EmployeeCardProps) => {
                   variant="outlined"
                   href={routes.employee(id)}
                   LinkComponent={Link}
+                  sx={{ textAlign: "center" }}
                 >
                   View details
                 </Button>

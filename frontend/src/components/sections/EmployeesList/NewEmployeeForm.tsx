@@ -68,7 +68,6 @@ const AddNewEmployeeButton = () => {
     try {
       validationSchema.parse(values);
     } catch (error) {
-      console.log({ error });
       if (error instanceof ZodError) {
         return error.formErrors.fieldErrors;
       }
@@ -80,7 +79,7 @@ const AddNewEmployeeButton = () => {
       ...values,
       hireDate: values.hireDate?.toISOString(),
     };
-    console.log("mutate", newEmployee);
+
     mutate(newEmployee as DTO.Employee);
   };
 
@@ -114,7 +113,6 @@ const AddNewEmployeeButton = () => {
       isOpen={isOpen}
       handleOpen={openDialog}
       handleClose={() => {
-        console.log("DONE");
         closeDialog();
         formik.resetForm();
       }}

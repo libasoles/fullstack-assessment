@@ -14,10 +14,16 @@ type Props = {
 const DeleteEmployeeButton = ({ employee }: Props) => {
   const { isOpen, openDialog, closeDialog } = useConfirmDialog();
 
-  const { mutate } = useDeleteEmployee();
+  const { mutate } = useDeleteEmployee({
+    onSuccess: () => {
+      closeDialog();
+    },
+  });
 
   const handleConfirm = () => {
     mutate(employee.id);
+
+    closeDialog();
   };
 
   return (

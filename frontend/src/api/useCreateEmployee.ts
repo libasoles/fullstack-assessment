@@ -11,7 +11,9 @@ type useCreateEmployeeProps = {
   onSuccess: () => void;
 };
 
-export function useCreateEmployee({ onSuccess }: useCreateEmployeeProps) {
+export function useCreateEmployee({
+  onSuccess: handleSuccess,
+}: useCreateEmployeeProps) {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -37,7 +39,7 @@ export function useCreateEmployee({ onSuccess }: useCreateEmployeeProps) {
         queryClient.setQueryData([EMPLOYEES], context?.previousEmployees);
       } else {
         // We keep the optimistic update, so we don't disturb the order of appeareance
-        onSuccess();
+        handleSuccess();
       }
     },
   });
