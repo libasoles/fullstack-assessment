@@ -16,7 +16,7 @@ const config = {
   password: `${DB_PASSWORD}`,
   database: `${DB_NAME}`,
   entities: [Employee, Department], // TODO: check if autoLoadEntities is enough
-  migrations: ['dist/migrations/*{.ts,.js}'],
+  migrations: ['src/migrations/*{.ts,.js}'],
   autoLoadEntities: true,
 };
 
