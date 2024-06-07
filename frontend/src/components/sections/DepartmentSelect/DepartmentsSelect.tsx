@@ -13,7 +13,7 @@ type Props = {
   value?: number | "";
   onChange: (value: Department) => void;
   helperText?: string | false;
-} & SelectProps<number>;
+} & Omit<SelectProps<number>, "onChange">;
 
 export const DepartmentsSelect = ({
   name,

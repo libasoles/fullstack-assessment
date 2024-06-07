@@ -4,7 +4,8 @@ import { useCreateEmployee } from "@/api/useCreateEmployee";
 import ConfirmDialog, {
   useConfirmDialog,
 } from "@/components/generic/ConfirmDialog";
-import { Typography } from "@mui/material";
+import { Department } from "@/types/Department";
+import { FormControl, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
@@ -40,14 +41,10 @@ const validationSchema = z.object({
     .string()
     .min(3, "Address is too short")
     .max(255, "Address is too long"),
-  // TODO: revisit this validation. Not working 100%
-  // department: z.object({
-  //   id: z.number(),
-  //   name: z.string(),
-  // }),
+  department: z.number().int(),
   hireDate: z
     .custom<Dayjs>((val) => val instanceof dayjs, "Invalid date")
-    .refine((data) => data < dayjs(Date.now()), {
+    .refine((data) => data <= dayjs(Date.now()), {
       message: "Can't be future date",
     }),
 });
@@ -60,7 +57,7 @@ type FormValues = Omit<DTO.Employee, "hireDate" | "department"> & {
 const AddNewEmployeeButton = () => {
   const { isOpen, openDialog, closeDialog } = useConfirmDialog();
 
-  const { mutate, isError, error } = useCreateEmployee({
+  const { mutate, isError } = useCreateEmployee({
     onSuccess: () => {
       closeDialog();
       formik.resetForm();
@@ -83,7 +80,7 @@ const AddNewEmployeeButton = () => {
       ...values,
       hireDate: values.hireDate?.toISOString(),
     };
-
+    console.log("mutate", newEmployee);
     mutate(newEmployee as DTO.Employee);
   };
 
@@ -186,8 +183,8 @@ const AddNewEmployeeButton = () => {
             <DepartmentsSelect
               name="department"
               value={formik.values.department?.id}
-              onChange={(department) => {
-                formik.setFieldValue("department", department);
+              onChange={(department: Department) => {
+                formik.setFieldValue("department", department?.id);
               }}
               onBlur={formik.handleBlur}
               helperText={
@@ -199,27 +196,33 @@ const AddNewEmployeeButton = () => {
             />
 
             <Box>
-              <DatePicker
-                label="Hire date"
-                name="hireDate"
-                value={formik.values.hireDate}
-                disableFuture
-                onChange={(value) => {
-                  formik.setFieldValue("hireDate", value, true);
-                  formik.validateField("hireDate");
-                }}
-                slotProps={{
-                  textField: {
-                    variant: "standard",
-                    fullWidth: true,
-                    onBlur: formik.handleBlur,
-                    helperText:
-                      formik.values.hireDate && Boolean(formik.errors.hireDate)
-                        ? formik.errors.hireDate?.[0]
-                        : " ",
-                  },
-                }}
-              />
+              <FormControl>
+                <DatePicker
+                  label="Hire date"
+                  name="hireDate"
+                  value={formik.values.hireDate}
+                  disableFuture
+                  onChange={(value) => {
+                    formik.setFieldValue("hireDate", value, true);
+                    formik.validateField("hireDate");
+                  }}
+                  slotProps={{
+                    textField: {
+                      variant: "standard",
+                      fullWidth: true,
+                      onBlur: formik.handleBlur,
+                      error:
+                        formik.touched.hireDate &&
+                        Boolean(formik.errors.hireDate),
+                      helperText:
+                        formik.touched.hireDate &&
+                        Boolean(formik.errors.hireDate)
+                          ? formik.errors.hireDate?.[0]
+                          : " ",
+                    },
+                  }}
+                />
+              </FormControl>
             </Box>
           </PairOfFields>
         </Box>
