@@ -21,7 +21,7 @@ export class DepartmentHistory {
   @IsNotEmpty()
   department: Department;
 
-  @Column()
+  @Column('timestamp')
   date: Date;
 
   constructor(params?: ConstructorParams) {
