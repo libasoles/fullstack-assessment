@@ -2,16 +2,16 @@
 
 ## Techonologies
 
-- React
-- Next.js
-- TypeScript
-- MUI for styling and component library
-- React Query for data fetching
-- Jest
-- React Testing Library
-- MSW to mock API responses
-- Formik to handle forms
-- Dayjs to handle dates
+- `React`
+- `Next.js`
+- `TypeScript`
+- `MUI` for styling and component library
+- `Axios` & `React Query` for data fetching
+- `Jest`
+- `React` Testing Library
+- `MSW` to mock API responses
+- `Formik` to handle forms
+- `Dayjs` to handle dates
 
 ## Requirements
 

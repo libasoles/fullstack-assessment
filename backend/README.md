@@ -2,12 +2,14 @@
 
 ## Techonologies
 
-- NestJS
-- TypeORM
-- PostgreSQL
-- Docker
-- Jest
-- PgAdmin
+- `NestJS`
+- `TypeORM`
+- `TypeScript`
+- `Class Validator` for DTOs
+- `PostgreSQL`
+- `Docker`
+- `Jest`
+- `PgAdmin`
 
 ## Requirements
 
