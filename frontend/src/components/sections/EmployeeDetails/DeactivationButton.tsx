@@ -8,7 +8,7 @@ type Props = {
 };
 
 const DeactivationButton = ({ employee, isActive }: Props) => {
-  const { mutate, isPending, isError } = useUpdateEmployee();
+  const { mutate, isPending } = useUpdateEmployee();
 
   const handleUpdate = () => {
     const updatedEmployee = { id: employee.id, isActive: !isActive };
@@ -16,6 +16,8 @@ const DeactivationButton = ({ employee, isActive }: Props) => {
   };
 
   const isButtonEnabled = !isPending;
+
+  // TODO: handle error scenario
 
   return (
     <Button

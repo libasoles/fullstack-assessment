@@ -13,12 +13,15 @@ async function fetchEmployee(id: Employee["id"]) {
 
 type useFetchEmployeeProps = { id: Employee["id"] };
 
+const fiveMinutes = 1000 * 60 * 5;
+
 export function useFetchEmployee({
   id,
 }: useFetchEmployeeProps): UseQueryResult<Employee> {
   return useQuery({
-    queryKey: [EMPLOYEE],
+    queryKey: [EMPLOYEE, String(id)],
     queryFn: () => fetchEmployee(id),
     select: mapEmployee,
+    staleTime: fiveMinutes,
   });
 }

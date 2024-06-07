@@ -33,7 +33,7 @@ export function useCreateEmployee({ onSuccess }: useCreateEmployeeProps) {
       queryClient.setQueryData([EMPLOYEES], context?.previousEmployees);
     },
     onSettled: (response, error, variables, context) => {
-      if (!response?.ok) {
+      if (!response?.status) {
         queryClient.setQueryData([EMPLOYEES], context?.previousEmployees);
       } else {
         // We keep the optimistic update, so we don't disturb the order of appeareance
