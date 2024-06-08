@@ -7,11 +7,13 @@
 - `TypeScript`
 - `MUI` for styling and component library
 - `Axios` & `React Query` for data fetching
+- `React Query devtools` for debugging
 - `Jest`
-- `React` Testing Library
+- `React Testing Library`
 - `MSW` to mock API responses
 - `Formik` to handle forms
 - `Dayjs` to handle dates
+- `React-virtual` to handle large lists (instead of pagination)
 
 ## Requirements
 

@@ -11,7 +11,7 @@ It's divided into two parts: the `backend` API and the `frontend` application. Y
 
 ## Requirements
 
-- `Node.js 20.9.0` LTS. Might works on previous versions, but it's not guaranteed.
+- `Node.js 20.9.0` LTS. Should works on previous versions as weel, like *18.18.0* LTS.
 - `Docker`. I'm currently using `v4.30.0`, but I think it should work on previous versions as well.
 
 ## Description of some decisions made
@@ -30,9 +30,9 @@ I used an `interceptor` to store the **deparment changes history**, and that is 
 
 I'm using `Material-UI` as a component library.
 
-I'm not using a state management library, neither context. Usually, moving the state down into components was enough. Maybe there's some extra render after data fetching but it's fine for this simple application.
+I'm not using a **state management library**, neither **context**. Usually, moving the state down into components was enough. Maybe there's some extra render after data fetching but it's fine for this simple application.
 
-I'm fetching data client side only. And I reason about state like *client state* vs *server state*, handling the latest with React Query.
+I'm fetching data client side only. And I reason about state like **client state** vs **server state**, handling the latest with **React Query**.
 
 ## Installation
 
