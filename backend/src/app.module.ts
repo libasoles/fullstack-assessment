@@ -5,8 +5,8 @@ import { AppService } from './app.service';
 
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import typeorm from './config/typeorm';
-import { EmployeesModule } from './employees/employees.module';
 import { DepartmentsModule } from './departments/departments.module';
+import { EmployeesModule } from './employees/employees.module';
 
 const configModule = ConfigModule.forRoot({
   isGlobal: true,

@@ -1,10 +1,10 @@
-import { plainToClass } from 'class-transformer';
-import { validateSync } from 'class-validator';
+import { plainToClass as create } from 'class-transformer';
+import { validateSync as validate } from 'class-validator';
 import { Employee } from './employee.entity';
 
 describe('CreateUserDto', () => {
   it('should have errors when there are missing fields', () => {
-    const fields = [
+    const missingFields = [
       'firstName',
       'lastName',
       'hireDate',
@@ -13,24 +13,24 @@ describe('CreateUserDto', () => {
       'address',
     ];
 
-    const incompleteEmployee = plainToClass(Employee, {
+    const incompleteEmployee = create(Employee, {
       id: 67,
       isActive: true,
     });
 
-    const errors = validateSync(incompleteEmployee);
+    const errors = validate(incompleteEmployee);
 
-    expect(errors).toHaveLength(fields.length);
+    expect(errors).toHaveLength(missingFields.length);
 
     errors.forEach((error) => {
-      expect(fields).toContain(error.property);
+      expect(missingFields).toContain(error.property);
     });
   });
 
   it('should validate max length of fields', () => {
-    const fields = ['firstName', 'lastName', 'phone', 'address'];
+    const constrainedFields = ['firstName', 'lastName', 'phone', 'address'];
 
-    const createUserDto = plainToClass(Employee, {
+    const employeeDto = create(Employee, {
       firstName: 'Juan Manuel xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
       lastName: 'De la Cruz xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
       hireDate: new Date('2021-04-03'),
@@ -43,12 +43,12 @@ describe('CreateUserDto', () => {
       isActive: true,
     });
 
-    const errors = validateSync(createUserDto);
+    const errors = validate(employeeDto);
 
-    expect(errors).toHaveLength(fields.length);
+    expect(errors).toHaveLength(constrainedFields.length);
 
     errors.forEach((error) => {
-      expect(fields).toContain(error.property);
+      expect(constrainedFields).toContain(error.property);
     });
   });
 });

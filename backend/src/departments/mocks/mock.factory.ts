@@ -1,8 +1,10 @@
 import { Department } from '../department.entity';
 
 export function createDepartment(data?: Partial<Department>) {
+  const randomId = Math.floor(Math.random() * 30);
+
   return new Department({
-    id: 1,
+    id: randomId,
     name: 'Sales',
     ...data,
   });

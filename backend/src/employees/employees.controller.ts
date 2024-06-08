@@ -27,7 +27,7 @@ export class EmployeesController {
   @Post()
   @UseInterceptors(LogEmployeeDepartment)
   async createEmployee(@Body() employee: Employee) {
-    if (!employee?.department?.id) {
+    if (!employee.department?.id) {
       throw new HttpException(
         'Deparment { id } is required',
         HttpStatus.BAD_REQUEST,

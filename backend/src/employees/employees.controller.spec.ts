@@ -5,11 +5,11 @@ import { EmployeesController } from './employees.controller';
 import { EmployeesService } from './employees.service';
 import { nonExistentEmployeeId, repositoryMocks } from './mocks/mock.db';
 import {
-  anEmployee,
-  anEmployeeWithoutDeparmentId,
+  anEmployeeBeingUpdated,
+  anEmployeeWithoutDepartmentId,
   anEmployeeWithoutId,
-  anotherEmployee,
-  anUpdatedEmployee,
+  anotherValidEmployee,
+  aValidEmployee,
 } from './mocks/mock.factory';
 
 describe('EmployeesController', () => {
@@ -32,32 +32,32 @@ describe('EmployeesController', () => {
     it('should return a confirmation with data when creating a new employee', async () => {
       const response = await controller.createEmployee(anEmployeeWithoutId);
 
-      expect(response).toEqual(anEmployee);
+      expect(response).toEqual(aValidEmployee);
     });
 
     it('should return all employees', async () => {
       const response = await controller.getAllEmployees();
 
-      expect(response).toEqual([anEmployee, anotherEmployee]);
+      expect(response).toEqual([aValidEmployee, anotherValidEmployee]);
     });
 
     it('should return a single employee', async () => {
-      const response = await controller.getEmployee(anEmployee.id);
+      const response = await controller.getEmployee(aValidEmployee.id);
 
-      expect(response).toEqual(anEmployee);
+      expect(response).toEqual(aValidEmployee);
     });
 
     it('should update an employee', async () => {
       const response = await controller.updateEmployee(
-        anUpdatedEmployee.id,
-        anUpdatedEmployee,
+        anEmployeeBeingUpdated.id,
+        anEmployeeBeingUpdated,
       );
 
-      expect(response).toEqual(anUpdatedEmployee);
+      expect(response).toEqual(anEmployeeBeingUpdated);
     });
 
     it('should delete an employee', async () => {
-      const response = await controller.deleteEmployee(anEmployee.id);
+      const response = await controller.deleteEmployee(aValidEmployee.id);
 
       expect(response).toEqual({ affected: 1 });
     });
@@ -66,7 +66,7 @@ describe('EmployeesController', () => {
   describe('Error cases', () => {
     it('should throw an exception when creating an employee without a department', async () => {
       await expect(
-        controller.createEmployee(anEmployeeWithoutDeparmentId),
+        controller.createEmployee(anEmployeeWithoutDepartmentId),
       ).rejects.toThrow('Deparment { id } is required');
     });
 
@@ -78,7 +78,7 @@ describe('EmployeesController', () => {
 
     it('should throw an exception when updating a non-existing employee', async () => {
       await expect(
-        controller.updateEmployee(nonExistentEmployeeId, anUpdatedEmployee),
+        controller.updateEmployee(nonExistentEmployeeId, aValidEmployee),
       ).rejects.toThrow('Employee not found');
     });
 

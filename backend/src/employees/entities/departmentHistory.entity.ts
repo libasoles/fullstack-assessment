@@ -16,11 +16,12 @@ export class DepartmentHistory {
   @PrimaryColumn({ name: 'department_id' })
   departmentId: number;
 
+  @IsNotEmpty()
   @ManyToOne(() => Department, (department) => department.id)
   @JoinColumn({ name: 'department_id' })
-  @IsNotEmpty()
   department: Department;
 
+  @IsNotEmpty()
   @Column('timestamp')
   date: Date;
 
