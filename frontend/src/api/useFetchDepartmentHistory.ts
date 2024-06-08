@@ -20,5 +20,7 @@ export function useFetchDepartmentHistory({
     queryKey: [DEPARTMENT_HISTORY, String(employeeId)],
     queryFn: () => fetchDepartmentHistory(employeeId),
     select: mapDepartmentHistory,
+    staleTime: 0,
+    gcTime: 0,
   });
 }

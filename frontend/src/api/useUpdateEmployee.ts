@@ -36,9 +36,13 @@ export function useUpdateEmployee() {
       );
     },
     onSuccess: (response, variables, context) => {
+      const employeeId = String(context?.employee.id);
+
       queryClient.invalidateQueries({ queryKey: [EMPLOYEES] });
+
       queryClient.invalidateQueries({
-        queryKey: [DEPARTMENT_HISTORY, String(context?.employee.id)],
+        queryKey: [DEPARTMENT_HISTORY, employeeId],
+        refetchType: "all",
       });
     },
   });
