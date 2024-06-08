@@ -3,7 +3,6 @@ import {
   QueryRunner,
   Table,
   TableForeignKey,
-  TableIndex,
 } from 'typeorm';
 
 const tableName = 'department_changes';
@@ -14,6 +13,7 @@ export class CreateHistoryTable1717591166410 implements MigrationInterface {
       new Table({
         name: tableName,
         columns: [
+          { name: 'id', type: 'int', isPrimary: true, isGenerated: true },
           { name: 'employee_id', type: 'int' },
           { name: 'department_id', type: 'int' },
           { name: 'date', type: 'timestamp', default: 'now()' },
@@ -38,14 +38,6 @@ export class CreateHistoryTable1717591166410 implements MigrationInterface {
         referencedColumnNames: ['id'],
         referencedTableName: 'department',
         onDelete: 'CASCADE',
-      }),
-    );
-
-    await queryRunner.createIndex(
-      tableName,
-      new TableIndex({
-        name: 'EMPLOYEE_DEPARTMENT',
-        columnNames: ['employee_id', 'department_id'],
       }),
     );
   }

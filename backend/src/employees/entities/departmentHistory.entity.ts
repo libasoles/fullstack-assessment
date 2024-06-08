@@ -10,10 +10,15 @@ type ConstructorParams = {
 
 @Entity({ name: 'department_changes' })
 export class DepartmentHistory {
-  @PrimaryColumn({ name: 'employee_id' })
+  @PrimaryColumn({ name: 'id' })
+  id: number;
+
+  @IsNotEmpty()
+  @Column({ name: 'employee_id' })
   employeeId: number;
 
-  @PrimaryColumn({ name: 'department_id' })
+  @IsNotEmpty()
+  @Column({ name: 'department_id' })
   departmentId: number;
 
   @IsNotEmpty()

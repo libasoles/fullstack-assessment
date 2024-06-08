@@ -7,6 +7,7 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { Observable, map } from 'rxjs';
 import { Repository } from 'typeorm';
+import { EmployeesService } from './employees.service';
 import { DepartmentHistory } from './entities/departmentHistory.entity';
 import { Employee } from './entities/employee.entity';
 
@@ -21,7 +22,7 @@ export class DepartmentHistoryService {
     const employeeId = employee.id;
     const departmentId = employee.department.id;
 
-    this.repository.save(
+    await this.repository.save(
       new DepartmentHistory({
         employeeId,
         departmentId,
@@ -46,13 +47,32 @@ export class DepartmentHistoryService {
 @Injectable()
 export class LogEmployeeDepartment implements NestInterceptor {
   constructor(
+    private readonly employeeService: EmployeesService,
     private readonly departmentHistoryService: DepartmentHistoryService,
   ) {}
 
-  intercept(context: ExecutionContext, handler: CallHandler): Observable<any> {
+  async intercept(
+    context: ExecutionContext,
+    handler: CallHandler,
+  ): Promise<Observable<any>> {
+    const employeeId = context.getArgByIndex(0)?.params?.id;
+    const currentEmployeeData = employeeId
+      ? await this.employeeService.getOne(employeeId)
+      : null;
+
     return handler.handle().pipe(
       map(async (employee) => {
-        return this.departmentHistoryService.saveDepartmentChange(employee);
+        const shouldLogDepartmentChange =
+          !employeeId ||
+          currentEmployeeData.department.id !== employee.department.id;
+
+        if (shouldLogDepartmentChange) {
+          return await this.departmentHistoryService.saveDepartmentChange(
+            employee,
+          );
+        }
+
+        return employee;
       }),
     );
   }
