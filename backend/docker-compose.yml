@@ -6,7 +6,7 @@ services:
       - POSTGRES_DB=${DB_NAME}
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
-    container_name: postgres-number8
+    container_name: postgres-poc
     volumes:
       - ./pgdata:/var/lib/postgresql/data 
     ports:
@@ -15,7 +15,7 @@ services:
     build: 
       context: . 
       dockerfile: Dockerfile 
-    container_name: nest-number8
+    container_name: nest-poc
     env_file:
       - .env
     ports: 
@@ -29,7 +29,7 @@ services:
   pgadmin:
     image: dpage/pgadmin4 
     restart: always 
-    container_name: pgadmin-number8 
+    container_name: pgadmin-poc 
     environment:
       - PGADMIN_DEFAULT_EMAIL=admin@admin.com 
       - PGADMIN_DEFAULT_PASSWORD=pgadmin4 
