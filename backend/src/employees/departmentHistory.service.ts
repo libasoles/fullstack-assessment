@@ -28,6 +28,8 @@ export class DepartmentHistoryService {
         date: new Date(),
       }),
     );
+
+    return employee;
   }
 
   async getDepartmentHistory(employeeId: Employee['id']) {
@@ -50,7 +52,7 @@ export class LogEmployeeDepartment implements NestInterceptor {
   intercept(context: ExecutionContext, handler: CallHandler): Observable<any> {
     return handler.handle().pipe(
       map(async (employee) => {
-        this.departmentHistoryService.saveDepartmentChange(employee);
+        return this.departmentHistoryService.saveDepartmentChange(employee);
       }),
     );
   }

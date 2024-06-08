@@ -39,13 +39,15 @@ export class EmployeesService {
       throw new Error('Employee not found');
     }
 
-    return this.employeeRepository.save(
+    await this.employeeRepository.save(
       new Employee({
         ...employeeToUpdate,
         ...partialEmployee,
         id: Number(id),
       }),
     );
+
+    return await this.getOne(id);
   }
 
   async delete(id: number) {
