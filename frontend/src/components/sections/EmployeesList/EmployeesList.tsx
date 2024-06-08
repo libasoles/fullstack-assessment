@@ -44,7 +44,7 @@ const Content = ({ employeesQuery, virtualizedList }: ContentProps) => {
     return (
       <NoContent
         variant="error"
-        message="We couldn't retrieve the list of users. Try loading the page again in a few seconds."
+        message="We couldn't retrieve the list of users. Either create one, or try loading the page again in a few seconds."
       />
     );
 

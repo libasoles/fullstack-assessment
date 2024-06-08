@@ -4,11 +4,13 @@ import { DepartmentHistory } from '../entities/departmentHistory.entity';
 import { Employee } from '../entities/employee.entity';
 
 export function createEmployee(data?: Partial<Employee>) {
+  const randomId = Math.floor(Math.random() * 30);
+
   return new Employee({
     firstName: 'Juan',
     lastName: 'Dela Cruz',
     hireDate: new Date(),
-    department: new Department({ name: 'Engineering' }),
+    department: new Department({ id: randomId, name: 'Engineering' }),
     phone: '1234567890',
     address: 'Manila, 445',
     isActive: true,
@@ -28,6 +30,9 @@ export function createDeparmentHistoryRecord(
 }
 
 export const anEmployeeWithoutId = createEmployee();
+export const anEmployeeWithoutDeparmentId = createEmployee({
+  department: new Department({ name: 'Bug hunting' }),
+});
 
 export const anEmployee = createEmployee({ id: 1, ...anEmployeeWithoutId });
 export const anotherEmployee = createEmployee({ id: 2, firstName: 'Pedro' });

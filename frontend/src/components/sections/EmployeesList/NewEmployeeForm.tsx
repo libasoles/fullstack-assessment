@@ -4,7 +4,6 @@ import { useCreateEmployee } from "@/api/useCreateEmployee";
 import ConfirmDialog, {
   useConfirmDialog,
 } from "@/components/generic/ConfirmDialog";
-import { Department } from "@/types/Department";
 import { FormControl, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -41,7 +40,10 @@ const validationSchema = z.object({
     .string()
     .min(3, "Address is too short")
     .max(255, "Address is too long"),
-  department: z.number().int(),
+  department: z.object({
+    id: z.number(),
+    name: z.string(),
+  }),
   hireDate: z
     .custom<Dayjs>((val) => val instanceof dayjs, "Invalid date")
     .refine((data) => data <= dayjs(Date.now()), {
@@ -51,7 +53,7 @@ const validationSchema = z.object({
 
 type FormValues = Omit<DTO.Employee, "hireDate" | "department"> & {
   hireDate: Dayjs | null;
-  department?: DTO.Department;
+  department: DTO.Department | undefined;
 };
 
 const AddNewEmployeeButton = () => {
@@ -180,12 +182,14 @@ const AddNewEmployeeButton = () => {
             <DepartmentsSelect
               name="department"
               value={formik.values.department?.id}
-              onChange={(department: Department) => {
-                formik.setFieldValue("department", department?.id);
+              onChange={(department: DTO.Department) => {
+                formik.setFieldValue("department", department, true);
               }}
               onBlur={formik.handleBlur}
               helperText={
-                formik.touched.department ? formik.errors.department : " "
+                formik.touched.department && Boolean(formik.errors.department)
+                  ? (formik.errors.department as string)
+                  : " "
               }
               error={
                 formik.touched.department && Boolean(formik.errors.department)

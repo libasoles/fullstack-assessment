@@ -53,7 +53,7 @@ export class Employee {
   address: string;
 
   @IsBoolean()
-  @Column({ name: 'is_active' })
+  @Column({ name: 'is_active', default: true })
   isActive: boolean;
 
   constructor(params?: ConstructorParams) {

@@ -18,7 +18,7 @@ export class EmployeesService {
     return this.employeeRepository.find({
       relations: ['department'],
       order: {
-        hireDate: 'DESC',
+        id: 'DESC',
       },
     });
   }

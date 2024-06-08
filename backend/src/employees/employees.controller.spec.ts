@@ -6,6 +6,7 @@ import { EmployeesService } from './employees.service';
 import { nonExistentEmployeeId, repositoryMocks } from './mocks/mock.db';
 import {
   anEmployee,
+  anEmployeeWithoutDeparmentId,
   anEmployeeWithoutId,
   anotherEmployee,
   anUpdatedEmployee,
@@ -63,6 +64,12 @@ describe('EmployeesController', () => {
   });
 
   describe('Error cases', () => {
+    it('should throw an exception when creating an employee without a department', async () => {
+      await expect(
+        controller.createEmployee(anEmployeeWithoutDeparmentId),
+      ).rejects.toThrow('Deparment { id } is required');
+    });
+
     it('should throw an exception when fetching a non-existing employee', async () => {
       await expect(
         controller.getEmployee(nonExistentEmployeeId),

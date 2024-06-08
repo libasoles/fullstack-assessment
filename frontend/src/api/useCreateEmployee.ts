@@ -23,8 +23,10 @@ export function useCreateEmployee({
       await queryClient.cancelQueries({ queryKey: [EMPLOYEES] });
       const previousEmployees = queryClient.getQueryData([EMPLOYEES]);
 
+      const randomId = Math.floor(Math.random() * 1000);
+
       queryClient.setQueryData([EMPLOYEES], (old: DTO.Employee[]) => [
-        { ...employee, id: old.length + 1 },
+        { ...employee, isActive: true, id: randomId },
         ...old,
       ]);
 
@@ -38,7 +40,7 @@ export function useCreateEmployee({
       if (!response?.status) {
         queryClient.setQueryData([EMPLOYEES], context?.previousEmployees);
       } else {
-        // We keep the optimistic update, so we don't disturb the order of appeareance
+        queryClient.invalidateQueries({ queryKey: [EMPLOYEES] });
         handleSuccess();
       }
     },
