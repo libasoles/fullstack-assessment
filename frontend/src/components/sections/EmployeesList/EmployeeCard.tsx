@@ -36,18 +36,19 @@ const EmployeeCard = ({ employee }: EmployeeCardProps) => {
               <Box ml={4}>
                 <Typography variant="h5" component="div" gutterBottom>
                   {completeName}
-                  <Typography color="text.secondary" component="span" ml={2}>
+                  <Typography color="text.secondary" component="span" ml={1}>
                     ({department?.name})
                   </Typography>
                 </Typography>
 
                 <Typography color="text.secondary">Hire date</Typography>
                 <Typography variant="body2">
-                  {hireDate()}{" "}
+                  {hireDate()}
                   <Typography
                     variant="body2"
                     color="text.secondary"
                     component="span"
+                    ml={1}
                   >
                     ({daysSinceHire})
                   </Typography>
