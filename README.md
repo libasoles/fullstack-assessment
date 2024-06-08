@@ -13,7 +13,7 @@ It's divided into two parts: the `backend` API and the `frontend` application. Y
 
 Click to view video.
 
-[<img src="DemoScreenshot.png">](Demo.mp4 "Demo")
+[<img src="DemoScreenshot.png">](https://youtu.be/cnSy8iRGt70 "Demo")
 
 ## Requirements
 
