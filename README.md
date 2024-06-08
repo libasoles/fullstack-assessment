@@ -2,7 +2,7 @@
 
 ## Description
 
-This project is a fullstack assessment for `Number 8`. It is a simple application that allows users to create, list and delete employees, as well as editing a couple attributes.
+This project is my solution to a full-stack assessment for a recruitment process. It is a simple application that allows users to create, list and delete employees, as well as editing a couple attributes.
 
 It's divided into two parts: the `backend` API and the `frontend` application. You can see more details about each part here:
 
@@ -52,7 +52,7 @@ npm install
 
 Then you can run the `frontend` application like this (keep reading for `backend` instructions):
 
-`npm run dev`
+`npm run build && npm run start`
 
 And the tests like this:
 
