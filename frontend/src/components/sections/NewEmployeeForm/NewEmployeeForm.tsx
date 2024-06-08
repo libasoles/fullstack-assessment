@@ -120,7 +120,7 @@ const AddNewEmployeeButton = () => {
     >
       {isError && <Typography color="error">Something went wrong</Typography>}
 
-      <form role="form">
+      <form role="form" autoComplete="off">
         <Box sx={{ minWidth: { sm: 500 } }}>
           <PairOfFields>
             <TextField
@@ -132,7 +132,7 @@ const AddNewEmployeeButton = () => {
               value={formik.values.firstName}
               onBlur={formik.handleBlur}
               helperText={
-                formik.touched.firstName ? formik.errors.firstName : " "
+                formik.touched.firstName ? formik.errors.firstName : ""
               }
               error={
                 formik.touched.firstName && Boolean(formik.errors.firstName)
@@ -146,9 +146,7 @@ const AddNewEmployeeButton = () => {
               onChange={formik.handleChange}
               value={formik.values.lastName}
               onBlur={formik.handleBlur}
-              helperText={
-                formik.touched.lastName ? formik.errors.lastName : " "
-              }
+              helperText={formik.touched.lastName ? formik.errors.lastName : ""}
               error={formik.touched.lastName && Boolean(formik.errors.lastName)}
             />
           </PairOfFields>
@@ -162,7 +160,7 @@ const AddNewEmployeeButton = () => {
               onChange={formik.handleChange}
               value={formik.values.phone}
               onBlur={formik.handleBlur}
-              helperText={formik.touched.phone ? formik.errors.phone : " "}
+              helperText={formik.touched.phone ? formik.errors.phone : ""}
               error={formik.touched.phone && Boolean(formik.errors.phone)}
             />
             <TextField
@@ -173,7 +171,7 @@ const AddNewEmployeeButton = () => {
               onChange={formik.handleChange}
               value={formik.values.address}
               onBlur={formik.handleBlur}
-              helperText={formik.touched.address ? formik.errors.address : " "}
+              helperText={formik.touched.address ? formik.errors.address : ""}
               error={formik.touched.address && Boolean(formik.errors.address)}
             />
           </PairOfFields>
@@ -189,7 +187,7 @@ const AddNewEmployeeButton = () => {
               helperText={
                 formik.touched.department && Boolean(formik.errors.department)
                   ? (formik.errors.department as string)
-                  : " "
+                  : ""
               }
               error={
                 formik.touched.department && Boolean(formik.errors.department)
@@ -219,7 +217,7 @@ const AddNewEmployeeButton = () => {
                         formik.touched.hireDate &&
                         Boolean(formik.errors.hireDate)
                           ? formik.errors.hireDate?.[0]
-                          : " ",
+                          : "",
                     },
                   }}
                 />
@@ -234,7 +232,12 @@ const AddNewEmployeeButton = () => {
 
 const PairOfFields = ({ children }: PropsWithChildren) => {
   return (
-    <Stack direction={{ sm: "row" }} gap={2} justifyContent="space-between">
+    <Stack
+      direction={{ sm: "row" }}
+      spacing={2}
+      justifyContent="space-between"
+      height={80}
+    >
       {children}
     </Stack>
   );
