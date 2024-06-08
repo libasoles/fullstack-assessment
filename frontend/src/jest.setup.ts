@@ -1,3 +1,4 @@
+import "@/mocks/htmlElementHeight";
 import { fakeDB, handlers } from "@/mocks/serverResponse.mock";
 import "@testing-library/jest-dom";
 import { setupServer } from "msw/node";

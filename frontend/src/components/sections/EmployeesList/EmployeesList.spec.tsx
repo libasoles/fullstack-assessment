@@ -12,7 +12,16 @@ describe("List of employees", () => {
     );
   });
 
-  it("should display a list of employees", async () => {
+  it("should display a scrollable list of employees that reveals more items on scroll", async () => {
+    await waitFor(() => {
+      const employees = screen.getAllByRole("listitem");
+      expect(employees).toHaveLength(2);
+
+      const scrollableDiv = screen.getByTestId("virtual-list");
+      scrollableDiv.scrollTop = 50;
+      scrollableDiv.dispatchEvent(new Event("scroll"));
+    });
+
     await waitFor(() => {
       const employees = screen.getAllByRole("listitem");
 
@@ -26,7 +35,6 @@ describe("List of employees", () => {
   describe("Delete employee", () => {
     it("should display a confirmation dialog when clicking on delete employee button", async () => {
       await clickDeleteButton();
-
       await waitFor(() => {
         const dialog = screen.getByRole("dialog");
 

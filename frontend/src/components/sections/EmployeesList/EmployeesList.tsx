@@ -20,13 +20,21 @@ const EmployeesList = () => {
   return (
     <div
       ref={listRef}
-      className="List"
-      style={{ height: "100vh", overflow: "auto" }}
+      style={{ height: "90vh", overflow: "auto" }}
+      data-testid="virtual-list"
     >
-      <Content
-        employeesQuery={employeesQuery}
-        virtualizedList={virtualizedList}
-      />
+      <div
+        style={{
+          width: "100%",
+          position: "relative",
+          height: `${virtualizedList.getTotalSize()}px`,
+        }}
+      >
+        <Content
+          employeesQuery={employeesQuery}
+          virtualizedList={virtualizedList}
+        />
+      </div>
     </div>
   );
 };
@@ -52,17 +60,12 @@ const Content = ({ employeesQuery, virtualizedList }: ContentProps) => {
   if (employees.length === 0) return <NoContent message="No employees found" />;
 
   return (
-    <div
-      style={{
-        height: `${virtualizedList.getTotalSize()}px`,
-        width: "100%",
-        position: "relative",
-      }}
-    >
+    <>
       {virtualizedList.getVirtualItems().map((virtualRow) => (
         <div
-          key={virtualRow.index}
+          key={virtualRow.key}
           ref={virtualizedList.measureElement}
+          data-index={virtualRow.index}
           style={{
             position: "absolute",
             top: 0,
@@ -75,7 +78,7 @@ const Content = ({ employeesQuery, virtualizedList }: ContentProps) => {
           <EmployeeCard employee={employees[virtualRow.index]} />
         </div>
       ))}
-    </div>
+    </>
   );
 };
 
