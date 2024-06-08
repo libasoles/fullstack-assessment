@@ -6,7 +6,7 @@ import { mapDepartmentHistory } from "./mappers";
 import { DEPARTMENT_HISTORY } from "./queryKeys";
 
 async function fetchDepartmentHistory(employeeId: Employee["id"]) {
-  const response = await axios.get(endpointFor.departmenHistory(employeeId));
+  const response = await axios.get(endpointFor.departmentHistory(employeeId));
 
   return response.data;
 }

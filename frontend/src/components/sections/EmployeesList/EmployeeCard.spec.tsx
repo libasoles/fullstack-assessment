@@ -31,7 +31,7 @@ describe("Employee card", () => {
     );
   });
 
-  it("should display the main employee data", async () => {
+  it("should display the main employee data in the card", async () => {
     const employeeCard = screen.getByRole("listitem");
 
     expect(employeeCard).toHaveTextContent("John Doe");

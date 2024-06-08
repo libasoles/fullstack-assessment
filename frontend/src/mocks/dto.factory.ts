@@ -17,7 +17,7 @@ export function createEmployee(data: Partial<DTO.Employee> = {}) {
   };
 }
 
-export const anEmployeeNamedAlice = createEmployee({
+export const aValidEmployeeNamedAlice = createEmployee({
   id: 13,
   firstName: "Alice",
   lastName: "Liddell",
@@ -36,5 +36,5 @@ export const departments = [
 export const employees = [
   createEmployee({ id: 1, firstName: "John Doe" }),
   createEmployee({ id: 2, firstName: "Jane Smith" }),
-  createEmployee(anEmployeeNamedAlice),
+  createEmployee(aValidEmployeeNamedAlice),
 ];
