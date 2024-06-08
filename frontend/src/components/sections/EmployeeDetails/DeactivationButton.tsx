@@ -17,7 +17,7 @@ const DeactivationButton = ({ employee, isActive }: Props) => {
 
   const isButtonEnabled = !isPending;
 
-  // TODO: handle error scenario
+  // TODO: handle error scenario, maybe show a snackbar/toast message
 
   return (
     <Button

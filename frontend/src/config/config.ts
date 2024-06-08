@@ -3,7 +3,8 @@ const config = {
     baseUrl: "http://localhost:3001/api",
   },
   dates: {
-    format: "MMMM D, YYYY",
+    longDateFormat: "MMMM D, YYYY",
+    americanDateFormat: "MM/DD/YYYY",
   },
 };
 

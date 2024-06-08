@@ -1,5 +1,3 @@
-"use client";
-
 import DepartmentHistory from "@/components/sections/EmployeeDetails/DepartmentHistory";
 import EmployeeDetails from "@/components/sections/EmployeeDetails/EmployeeDetails";
 import { routes } from "@/config/routes";
@@ -9,6 +7,10 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Link from "next/link";
+
+export const metadata = {
+  title: "Employee Details",
+};
 
 type Props = {
   params: { id: Employee["id"] };

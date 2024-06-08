@@ -4,7 +4,7 @@ import { useFetchEmployee } from "@/api/useFetchEmployee";
 import { EmployeeAvatar } from "@/components/generic/EmployeeAvatar";
 import Loading from "@/components/generic/Loading";
 import NoContent from "@/components/generic/NoContent";
-import DepartmentForm from "@/components/sections/DepartmentSelect/DepartmentForm";
+import DepartmentForm from "@/components/sections/DepartmentForm/DepartmentForm";
 import DeactivationButton from "@/components/sections/EmployeeDetails/DeactivationButton";
 import { InfoRow } from "@/components/sections/EmployeeDetails/InfoRow";
 import { Employee } from "@/types/Employee";
@@ -29,8 +29,15 @@ const EmployeeDetails = ({ employeeId: id }: Props) => {
       />
     );
 
-  const { firstName, phone, address, daysSinceHire, isActive, name, hireDate } =
-    employee;
+  const {
+    firstName,
+    phone,
+    address,
+    daysSinceHire,
+    isActive,
+    completeName,
+    hireDate,
+  } = employee;
 
   return (
     <Stack
@@ -40,9 +47,10 @@ const EmployeeDetails = ({ employeeId: id }: Props) => {
     >
       <Stack direction="row" spacing={4}>
         <EmployeeAvatar alt={firstName} isDeactivated={!isActive} />
+
         <Stack>
           <Typography variant="h5" component="div" gutterBottom>
-            {name()}
+            {completeName}
           </Typography>
 
           <InfoRow label="Telephone" value={phone} />

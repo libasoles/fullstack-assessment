@@ -1,18 +1,12 @@
+import { mockSystemDate } from "@/mocks/systemDate";
 import dayjs from "dayjs";
-import timezone from "dayjs/plugin/timezone";
-import utc from "dayjs/plugin/utc";
 import { daysSince } from "./date";
 
 describe("duration", () => {
   const mockedDate = new Date("2024-7-1");
 
   beforeEach(() => {
-    dayjs.extend(utc);
-    dayjs.extend(timezone);
-    dayjs.tz.setDefault("UTC");
-
-    jest.useFakeTimers();
-    jest.setSystemTime(mockedDate);
+    mockSystemDate(mockedDate);
   });
 
   afterEach(() => {

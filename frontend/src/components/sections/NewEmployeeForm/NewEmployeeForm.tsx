@@ -15,7 +15,7 @@ import dayjs, { Dayjs } from "dayjs";
 import { useFormik } from "formik";
 import { PropsWithChildren } from "react";
 import { z, ZodError } from "zod";
-import { DepartmentsSelect } from "../DepartmentSelect/DepartmentsSelect";
+import { DepartmentsSelect } from "./DepartmentsSelect";
 
 const initialValues = {
   firstName: "",

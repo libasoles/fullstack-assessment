@@ -1,7 +1,9 @@
+// Domain objects not related to any external system
+
 import { Employee } from "@/types/Employee";
 
 export function createEmployee(data: Partial<Employee> = {}) {
-  const name =
+  const completeName =
     data.firstName && data.lastName
       ? `${data.firstName} ${data.lastName}`
       : "Juan De la Cruz";
@@ -10,7 +12,7 @@ export function createEmployee(data: Partial<Employee> = {}) {
     id: 18,
     firstName: "Juan",
     lastName: "De la Cruz",
-    name: () => name,
+    completeName,
     hireDate: () => "February 3, 2024",
     daysSinceHire: "1y 4m 7d",
     department: {

@@ -32,7 +32,7 @@ export const useConfirmDialog = () => {
 };
 
 const ConfirmDialog = ({
-  title,
+  title = "Are you sure?",
   trigger,
   onConfirm,
   children,
@@ -46,6 +46,7 @@ const ConfirmDialog = ({
   return (
     <>
       {trigger()}
+
       <Dialog
         open={isOpen}
         onClose={handleClose}
@@ -61,7 +62,7 @@ const ConfirmDialog = ({
             justifyContent="space-between"
             alignItems="center"
           >
-            {title ? title : "Are you sure?"}
+            {title}
             {fullScreen && (
               <IconButton onClick={handleClose}>
                 <CloseOutlined />
@@ -69,7 +70,9 @@ const ConfirmDialog = ({
             )}
           </Stack>
         </DialogTitle>
+
         <DialogContent>{children}</DialogContent>
+
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
           <Button onClick={onConfirm} autoFocus disabled={isDisabled}>

@@ -15,10 +15,10 @@ export function useUpdateEmployee() {
     onMutate: async (partialEmployee: Partial<DTO.Employee>) => {
       const targetQueryKey = [EMPLOYEE, String(partialEmployee.id)];
 
-      // Optimistically update the cache
       await queryClient.cancelQueries({ queryKey: targetQueryKey });
       const employee = queryClient.getQueryData(targetQueryKey) as DTO.Employee;
 
+      // Optimistically update the cache
       queryClient.setQueryData(targetQueryKey, (old: DTO.Employee) => ({
         ...employee,
         ...partialEmployee,

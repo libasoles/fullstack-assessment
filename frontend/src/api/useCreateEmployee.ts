@@ -19,12 +19,12 @@ export function useCreateEmployee({
   return useMutation({
     mutationFn: (employee: DTO.Employee) => createEmployee(employee),
     onMutate: async (employee: DTO.Employee) => {
-      // Optimistically update the cache
       await queryClient.cancelQueries({ queryKey: [EMPLOYEES] });
       const previousEmployees = queryClient.getQueryData([EMPLOYEES]);
 
       const randomId = Math.floor(Math.random() * 1000);
 
+      // Optimistically update the cache
       queryClient.setQueryData([EMPLOYEES], (old: DTO.Employee[]) => [
         { ...employee, isActive: true, id: randomId },
         ...old,
@@ -38,9 +38,11 @@ export function useCreateEmployee({
     },
     onSettled: (response, error, variables, context) => {
       if (!response?.status) {
+        // Rollback the cache update on unhandled error
         queryClient.setQueryData([EMPLOYEES], context?.previousEmployees);
       } else {
         queryClient.invalidateQueries({ queryKey: [EMPLOYEES] });
+
         handleSuccess();
       }
     },

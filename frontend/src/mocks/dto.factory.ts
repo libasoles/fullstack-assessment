@@ -1,3 +1,5 @@
+// DTOs (Data Transfer Objects) that are used to communicate between the client and the server.
+
 export function createEmployee(data: Partial<DTO.Employee> = {}) {
   return {
     id: 18,
@@ -23,3 +25,16 @@ export const anEmployeeNamedAlice = createEmployee({
   phone: "(+55) 445577343",
   address: "Siempre viva 123",
 });
+
+export const departments = [
+  { id: 1, name: "Engineering" },
+  { id: 2, name: "Marketing" },
+  { id: 3, name: "Sales" },
+  { id: 4, name: "Finance" },
+];
+
+export const employees = [
+  createEmployee({ id: 1, firstName: "John Doe" }),
+  createEmployee({ id: 2, firstName: "Jane Smith" }),
+  createEmployee(anEmployeeNamedAlice),
+];

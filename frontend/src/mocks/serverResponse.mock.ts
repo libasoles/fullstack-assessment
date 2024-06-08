@@ -1,19 +1,6 @@
 import { endpointFor } from "@/api/endpoints";
 import { http, HttpHandler, HttpResponse } from "msw";
-import { anEmployeeNamedAlice, createEmployee } from "./server.factory";
-
-const employees = [
-  createEmployee({ id: 1, firstName: "John Doe" }),
-  createEmployee({ id: 2, firstName: "Jane Smith" }),
-  createEmployee(anEmployeeNamedAlice),
-];
-
-const departments = [
-  { id: 1, name: "Engineering" },
-  { id: 2, name: "Marketing" },
-  { id: 3, name: "Sales" },
-  { id: 4, name: "Finance" },
-];
+import { anEmployeeNamedAlice, departments, employees } from "./dto.factory";
 
 type FakeDB = {
   employees: DTO.Employee[];
@@ -43,13 +30,9 @@ const getDepartments = http.get(endpointFor.departments, () => {
   return HttpResponse.json(departments);
 });
 
-type QueryParam = {
-  id: string;
-};
-
 const updateEmployee: HttpHandler = http.patch(
   `${endpointFor.employees}/*`,
-  // @ts-ignore
+  // @ts-ignore this is a tricky type
   ({ request }) => {
     const employee = fakeDB.employees.find(
       (employee: DTO.Employee) => employee.id === anEmployeeNamedAlice.id

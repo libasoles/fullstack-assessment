@@ -15,8 +15,8 @@ namespace DTO {
     isActive?: boolean;
   }
 
-  export type DepartmentHistory = {
+  export interface DepartmentHistory {
     date: string;
     department: Department;
-  };
+  }
 }

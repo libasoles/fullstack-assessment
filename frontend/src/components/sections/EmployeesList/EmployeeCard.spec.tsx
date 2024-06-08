@@ -1,4 +1,5 @@
-import { createEmployee } from "@/mocks/client.factory";
+import { createEmployee } from "@/mocks/domain.factory";
+import { mockSystemDate } from "@/mocks/systemDate";
 import ClientProviders from "@/providers/clientProviders";
 import { render, screen } from "@testing-library/react";
 import EmployeeCard from "./EmployeeCard";
@@ -14,6 +15,15 @@ const anEmployee = createEmployee({
 
 describe("Employee card", () => {
   beforeEach(() => {
+    const mockedDate = new Date("2024-7-1");
+    mockSystemDate(mockedDate);
+  });
+
+  afterEach(() => {
+    jest.useRealTimers();
+  });
+
+  beforeEach(() => {
     render(
       <ClientProviders>
         <EmployeeCard employee={anEmployee} />
@@ -24,7 +34,8 @@ describe("Employee card", () => {
   it("should display the main employee data", async () => {
     const employeeCard = screen.getByRole("listitem");
 
-    expect(employeeCard).toHaveTextContent("John Doe (Engineering)");
+    expect(employeeCard).toHaveTextContent("John Doe");
+    expect(employeeCard).toHaveTextContent("(Engineering)");
     expect(employeeCard).toHaveTextContent("February 3, 2024 (1y 4m 7d)");
   });
 

@@ -1,4 +1,5 @@
 "use client";
+
 import darkScrollbar from "@mui/material/darkScrollbar";
 import { createTheme } from "@mui/material/styles";
 import { Roboto } from "next/font/google";

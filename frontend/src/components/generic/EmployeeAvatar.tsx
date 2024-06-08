@@ -10,7 +10,6 @@ interface Props extends AvatarProps {
 
 const testId = "employee-avatar";
 
-// TODO: solve visual glitch on activation change
 export const EmployeeAvatar = ({
   isDeactivated = false,
   alt,

@@ -1,3 +1,5 @@
+"use client";
+
 import { useFetchDepartmentHistory } from "@/api/useFetchDepartmentHistory";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
@@ -25,6 +27,7 @@ export function DepartmentHistory({ employeeId }: Props) {
       <Typography variant="h6" gutterBottom>
         Department History
       </Typography>
+
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="Department changes history">
           <TableHead>

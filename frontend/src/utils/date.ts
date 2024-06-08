@@ -10,6 +10,7 @@ dayjs.extend(timezone);
 dayjs.tz.setDefault("UTC");
 
 type DaySince = (aDate: Dayjs | string) => string;
+
 export const daysSince: DaySince = (aDate) => {
   const startDate = dayjs(aDate);
   const today = dayjs();

@@ -34,6 +34,7 @@ const DepartmentForm = ({ employee }: Props) => {
       <form role="form">
         <FormControl fullWidth variant="standard">
           <InputLabel id="department-label">Department</InputLabel>
+
           <Select
             labelId="department-label"
             value={selected}

@@ -40,6 +40,7 @@ export const DepartmentsSelect = ({
   return (
     <FormControl fullWidth variant="standard">
       <InputLabel id="department-label">Department</InputLabel>
+
       <Select
         labelId="department-label"
         label="Department"
@@ -55,6 +56,7 @@ export const DepartmentsSelect = ({
           </MenuItem>
         ))}
       </Select>
+
       {error && helperText && (
         <FormHelperText error component="div">
           {helperText}

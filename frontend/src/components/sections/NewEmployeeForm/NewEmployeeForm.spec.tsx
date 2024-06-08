@@ -28,6 +28,6 @@ describe("Add new employee", () => {
       expect(form).toBeInTheDocument();
     });
 
-    // TODO: test on submit it adds the new employee to the list. And it it fails, displays a dialog (TODO)
+    // TODO: test on submit it adds the new employee to the list. And it it fails, displays a message (TODO)
   });
 });

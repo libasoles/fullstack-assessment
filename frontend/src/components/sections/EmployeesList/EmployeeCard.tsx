@@ -16,8 +16,15 @@ type EmployeeCardProps = {
 };
 
 const EmployeeCard = ({ employee }: EmployeeCardProps) => {
-  const { id, name, firstName, department, hireDate, daysSinceHire, isActive } =
-    employee;
+  const {
+    id,
+    completeName,
+    firstName,
+    department,
+    hireDate,
+    daysSinceHire,
+    isActive,
+  } = employee;
 
   return (
     <Box sx={{ minWidth: 275 }}>
@@ -28,8 +35,8 @@ const EmployeeCard = ({ employee }: EmployeeCardProps) => {
               <EmployeeAvatar alt={firstName} isDeactivated={!isActive} />
               <Box ml={4}>
                 <Typography variant="h5" component="div" gutterBottom>
-                  {name()}{" "}
-                  <Typography color="text.secondary" component="span">
+                  {completeName}
+                  <Typography color="text.secondary" component="span" ml={2}>
                     ({department?.name})
                   </Typography>
                 </Typography>

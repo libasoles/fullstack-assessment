@@ -1,3 +1,5 @@
+// From DTOs to domain entities
+
 import config from "@/config/config";
 import { Department, DepartmentHistory } from "@/types/Department";
 import { Employee } from "@/types/Employee";
@@ -10,16 +12,17 @@ export function mapEmployees(employees: DTO.Employee[]): Employee[] {
 
 export function mapEmployee(employee: DTO.Employee): Employee {
   const formattedDuration = daysSince(employee.hireDate);
+  const { longDateFormat } = config.dates;
+  const { id, firstName, lastName, department, isActive } = employee;
 
   return {
     ...employee,
-    id: employee.id as Employee["id"],
-    department: employee.department as Department,
+    id: id as Employee["id"],
+    completeName: `${firstName} ${lastName}`,
+    department: department as Department,
+    isActive: isActive as boolean,
     daysSinceHire: formattedDuration,
-    isActive: employee.isActive as boolean,
-    name: () => `${employee.firstName} ${employee.lastName}`,
-    hireDate: (format = config.dates.format) =>
-      dayjs(employee.hireDate).format(format),
+    hireDate: (as = longDateFormat) => dayjs(employee.hireDate).format(as),
   };
 }
 
@@ -30,8 +33,11 @@ export function mapDepartmentHistory(
 }
 
 function mapHistoryRecord(record: DTO.DepartmentHistory): DepartmentHistory {
+  const { americanDateFormat } = config.dates;
+  const { department, date } = record;
+
   return {
-    department: record.department as Department,
-    date: dayjs(record.date).format("MM/DD/YYYY"),
+    department: department as Department,
+    date: dayjs(date).format(americanDateFormat),
   };
 }
