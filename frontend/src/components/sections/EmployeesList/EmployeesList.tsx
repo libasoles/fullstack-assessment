@@ -3,7 +3,6 @@
 import { useFetchEmployees } from "@/api/useFetchEmployees";
 import Loading from "@/components/generic/Loading";
 import NoContent from "@/components/generic/NoContent";
-import Stack from "@mui/material/Stack";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import React from "react";
 import EmployeeCard from "./EmployeeCard";
@@ -19,13 +18,15 @@ const EmployeesList = () => {
   });
 
   return (
-    <div ref={listRef}>
-      <Stack gap={2}>
-        <Content
-          employeesQuery={employeesQuery}
-          virtualizedList={virtualizedList}
-        />
-      </Stack>
+    <div
+      ref={listRef}
+      className="List"
+      style={{ height: "100vh", overflow: "auto" }}
+    >
+      <Content
+        employeesQuery={employeesQuery}
+        virtualizedList={virtualizedList}
+      />
     </div>
   );
 };
@@ -53,20 +54,21 @@ const Content = ({ employeesQuery, virtualizedList }: ContentProps) => {
   return (
     <div
       style={{
-        height: virtualizedList.getTotalSize(),
+        height: `${virtualizedList.getTotalSize()}px`,
         width: "100%",
         position: "relative",
       }}
     >
       {virtualizedList.getVirtualItems().map((virtualRow) => (
         <div
-          key={virtualRow.key}
+          key={virtualRow.index}
           ref={virtualizedList.measureElement}
           style={{
             position: "absolute",
             top: 0,
             left: 0,
             width: "100%",
+            height: `${virtualRow.size}px`,
             transform: `translateY(${virtualRow.start}px)`,
           }}
         >
