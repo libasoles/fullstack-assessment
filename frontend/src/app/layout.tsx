@@ -5,7 +5,7 @@ import { PropsWithChildren } from "react";
 import Providers from "../providers/providers";
 
 export const metadata: Metadata = {
-  description: "Fullstack assessment for Number8",
+  description: "Fullstack assessment",
 };
 
 export default function RootLayout({ children }: PropsWithChildren) {

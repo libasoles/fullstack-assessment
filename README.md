@@ -1,4 +1,4 @@
-# Fullstack assessment - Number 8
+# Fullstack assessment
 
 ## Description
 
