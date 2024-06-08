@@ -9,6 +9,12 @@ It's divided into two parts: the `backend` API and the `frontend` application. Y
 - [Backend API](backend/README.md)
 - [Frontend Application](frontend/README.md)
 
+## Demo
+
+Click to view video.
+
+[<img src="DemoScreenshot.png">](Demo.mp4 "Demo")
+
 ## Requirements
 
 - `Node.js 20.9.0` LTS. Should works on previous versions as weel, like *18.18.0* LTS.
