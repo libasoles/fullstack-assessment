@@ -84,17 +84,6 @@ const getDepartmentHistory = http.get(
   }
 );
 
-const catchOtherEndpoints = http.all("*", ({ request }) => {
-  console.warn(
-    "Unhandled Request intercepted:",
-    request.url.toString(),
-    request.method,
-    request.body?.toString()
-  );
-
-  return HttpResponse.text("Consider adding a mock response in MSW server");
-});
-
 export const handlers = [
   listEmployees,
   getEmployee,
@@ -102,5 +91,4 @@ export const handlers = [
   updateEmployee,
   deleteEmployee,
   getDepartmentHistory,
-  catchOtherEndpoints,
 ];

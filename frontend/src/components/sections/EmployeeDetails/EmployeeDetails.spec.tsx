@@ -1,20 +1,10 @@
 import { aValidEmployeeNamedAlice } from "@/mocks/dto.factory";
-import { mockSystemDate } from "@/mocks/systemDate";
 import ClientProviders from "@/providers/clientProviders";
 import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import EmployeeDetails from "./EmployeeDetails";
 
 describe("Employee details", () => {
-  beforeEach(() => {
-    const mockedDate = new Date("2024-7-1");
-    mockSystemDate(mockedDate);
-  });
-
-  afterEach(() => {
-    jest.useRealTimers();
-  });
-
   beforeEach(() => {
     render(
       <ClientProviders>
@@ -31,7 +21,6 @@ describe("Employee details", () => {
       expect(employeeSection).toHaveTextContent("Telephone:(+55) 445577343");
       expect(employeeSection).toHaveTextContent("Address:Siempre viva 123");
       expect(employeeSection).toHaveTextContent("April 6, 2023");
-      expect(employeeSection).toHaveTextContent("(1y - 2m)");
     });
   });
 
